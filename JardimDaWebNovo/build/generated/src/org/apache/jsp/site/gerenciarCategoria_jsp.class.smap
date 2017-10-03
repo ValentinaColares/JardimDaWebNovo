@@ -1,0 +1,27 @@
+SMAP
+gerenciarCategoria_jsp.java
+JSP
+*S JSP
+*F
++ 0 gerenciarCategoria.jsp
+site/gerenciarCategoria.jsp
++ 1 cabecalho.jsp
+site/cabecalho.jsp
++ 2 rodape.jsp
+site/rodape.jsp
+*L
+1,5:55
+1#1,13:59
+13,53:72
+5#0,4:124
+10,20:130
+29,28:150
+56,2:178
+57,2:180
+59,4:182,3
+63:194
+64:195,3
+65,8:198
+1#2,43:205
+72#0:248
+*E
