@@ -5,6 +5,10 @@ import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import util.Criptografia;
 import dao.UsuarioDAO;
+import dao.CategoriaDAO;
+import java.util.List;
+import modelo.Categoria;
+import dao.UsuarioDAO;
 import modelo.Usuario;
 
 public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -53,6 +57,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\n');
       out.write('\n');
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<html><head>\n");
       out.write("    <title>Jardim da Web</title>\n");
       out.write("    <meta charset=\"utf-8\">\n");
@@ -63,7 +71,11 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <link href=\"css/css da index.css\" rel=\"stylesheet\" type=\"text/css\">\n");
       out.write("  </head>\n");
  
-    Usuario usuario;
+    Usuario usuario = new Usuario();
+    UsuarioDAO Usuariodao = new UsuarioDAO();
+    
+    CategoriaDAO Cdao = new CategoriaDAO();
+    List<Categoria> Clista = Cdao.listar();
 
       out.write("\n");
       out.write("  <body>\n");
@@ -72,20 +84,25 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <div class=\"container\">\n");
       out.write("        <div class=\"navbar-header\">\n");
       out.write("          <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#navbar-ex-collapse\"></button>\n");
-      out.write("          <a class=\"navbar-brand\" href=\"home/index.jsp\"><span><img src=\"css/logo.png\" height=\"34\" width=\"83\"></span></a>\n");
+      out.write("          <a class=\"brand\" href=\"index.jsp\"><span><img src=\"css/home.png\" height=\"26\" width=\"50\" class=\"img-circle img-responsive\"></span></a>\n");
       out.write("        </div>\n");
       out.write("        <div class=\"collapse navbar-collapse\" id=\"navbar-ex-collapse\">\n");
       out.write("          <ul class=\"nav navbar-nav navbar-right\">\n");
       out.write("            <li class=\"dropdown\">\n");
       out.write("                <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Categorias<span></span></a>\n");
       out.write("                <ul class=\"dropdown-menu\">\n");
-      out.write("                    <li><a href=\"listaPlanta.jsp\">Árvores</a></li>\n");
-      out.write("                    <li><a href=\"listaPlanta.jsp\">Temperos</a></li>\n");
-      out.write("                    <li><a href=\"listaPlanta.jsp\">Chás</a></li>\n");
-      out.write("                    <li><a href=\"listaPlanta.jsp\">Flores</a></li>\n");
-      out.write("                    <li><a href=\"listaPlanta.jsp\">Verduras</a></li>\n");
-      out.write("                    <li><a href=\"listaPlanta.jsp\">Legumes</a></li>\n");
-      out.write("                    <li><a href=\"listaPlanta.jsp\">PANC's</a></li>\n");
+      out.write("                    ");
+for(Categoria Citem: Clista){ 
+      out.write("\n");
+      out.write("                        <li><a class=\"list\" href=\"listaPlanta.jsp?categoria=");
+      out.print(Citem.getCodigo());
+      out.write('"');
+      out.write('>');
+      out.print(Citem.getNome() );
+      out.write("</a></li>\n");
+      out.write("                    ");
+ } 
+      out.write("\n");
       out.write("                </ul>\n");
       out.write("            </li>\n");
       out.write("            <li class=\"dropdown\">\n");
@@ -103,8 +120,31 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <li>\n");
       out.write("              <a href=\"#\">Contato</a>\n");
       out.write("            </li>\n");
-      out.write("            <li>\n");
-      out.write("              <a href=\"login.jsp\">Meu Perfil</a>\n");
+      out.write("            <li class=\"dropdown\">\n");
+      out.write("                ");
+if (session.getAttribute("usuario") != null) { 
+      out.write("\n");
+      out.write("                    <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Categoria<span></span></a>\n");
+      out.write("                    <ul class=\"dropdown-menu\">\n");
+      out.write("                        <li><a href=\"addCategoria.jsp\">Add Categoria</a></li>\n");
+      out.write("                        <li><a href=\"gerenciarCategoria.jsp\">Gerenciar Categoria</a></li>\n");
+      out.write("                    </ul>\n");
+      out.write("                ");
+} 
+      out.write("\n");
+      out.write("            </li>\n");
+      out.write("            <li> \n");
+      out.write("                ");
+if (session.getAttribute("usuario") == null) { 
+      out.write("\n");
+      out.write("                    <a href=\"login.jsp\"><img src=\"css/person.png\"></a>\n");
+      out.write("                ");
+}else{ 
+      out.write("\n");
+      out.write("                    <a href=\"meuPerfil.jsp\"><img src=\"css/person.png\" ></a>\n");
+      out.write("                ");
+}
+      out.write("\n");
       out.write("            </li>\n");
       out.write("          </ul>\n");
       out.write("        </div>\n");
@@ -114,22 +154,26 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<link href=\"../css do login.css\" rel=\"stylesheet\" type=\"text/css\">\n");
       out.write("\n");
  
-    UsuarioDAO dao = new UsuarioDAO();
     
     if(request.getMethod().equals("POST")){
         //tentativa de login
+
+        try{
+            usuario = Usuariodao.login(request.getParameter("txtEmail"));
+            String senhaCerta = usuario.getSenha();
         
-        usuario = dao.login(request.getParameter("txtEmail"));
-        
-        String senha = Criptografia.convertPasswordToMD5(request.getParameter("txtSenha"));
-        
-        if(senha.equals(usuario.getSenha())){
-            //criar a minha session
-            //se a senha estiver certa, ele loga
-            session.setAttribute("usuario", usuario);
-            //redirecionar para o perfil
-            response.sendRedirect("meuPerfil.jsp"); //depois eu vou direto pro perfil do usuario
+            if(Criptografia.convertPasswordToMD5(request.getParameter("txtSenha")).equals(senhaCerta)){
+                //criar a minha session
+                //se a senha estiver certa, ele loga
+                session.setAttribute("usuario", usuario);
+                //redirecionar para o perfil
+                response.sendRedirect("meuPerfil.jsp"); //depois eu vou direto pro perfil do usuario
+            }
+        }catch(Exception ex){
+            //Erro no email
         }
+        
+        
     }
     //Não ta entrando com post
     
@@ -147,7 +191,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                  <div class=\"col-md-6\">\n");
       out.write("                    <h1 class=\"text-center\">Criar nova conta</h1>\n");
       out.write("                    <center>\n");
-      out.write("                      <!--<button type=\"button\" onClick=\"usuario/addUsuario.jsp\" class=\"btn btn-lg btn-primary\" disabled=\"\">Criar conta</button> -->\n");
+      out.write("                      \n");
       out.write("                      <a href=\"addUsuario.jsp\" class=\"btn btn-lg btn-primary\">Criar Conta</a>\n");
       out.write("                    </center>\n");
       out.write("                  </div>\n");
@@ -156,20 +200,16 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\n");
       out.write("          </div>\n");
       out.write("          <div class=\"col-md-6\">\n");
-      out.write("            <form method=\"post\" action=\"meuPerfil.jsp\">\n");
+      out.write("            <form method=\"post\" action=\"#\">\n");
       out.write("                <div class=\"form-group\">\n");
-      out.write("                    <label for=\"exampleInputEmail1\">Email address</label>\n");
-      out.write("                    <input type=\"email\" name=\"txtEmail\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Enter email\">\n");
+      out.write("                    <label>E-mail</label>\n");
+      out.write("                    <input type=\"text\" name=\"txtEmail\" class=\"form-control\" placeholder=\"Enter email\">\n");
       out.write("                </div>\n");
       out.write("                <div class=\"form-group\">\n");
-      out.write("                    <label for=\"exampleInputPassword1\">Password</label>\n");
-      out.write("                    <input type=\"password\" name=\"txtSenha\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Password\">\n");
+      out.write("                    <label>Senha</label>\n");
+      out.write("                    <input type=\"password\" name=\"txtSenha\" class=\"form-control\" placeholder=\"Password\">\n");
       out.write("                </div>\n");
-      out.write("                <div class=\"form-check\">\n");
-      out.write("                    <label class=\"form-check-label\">\n");
-      out.write("                    <input type=\"checkbox\" class=\"form-check-input\">Check me out</label>\n");
-      out.write("                </div>\n");
-      out.write("                <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n");
+      out.write("                <input type=\"submit\" class=\"btn btn-primary\" value=\"Entrar\"></input>\n");
       out.write("            </form>\n");
       out.write("          </div>\n");
       out.write("        </div>\n");

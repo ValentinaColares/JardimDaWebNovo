@@ -9,10 +9,12 @@
     UsuarioDAO dao = new UsuarioDAO();
     List<Usuario> lista = dao.listar();
     
+    
     if (session.getAttribute("usuario") == null) {
         response.sendRedirect("login.jsp");
     
     } else{   
+        
         usuario = ((Usuario) session.getAttribute("usuario"));
     
         
@@ -32,6 +34,8 @@
         }
         
     }
+    
+    
 %>
 
     <div class="section">
@@ -43,18 +47,24 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle img-responsive">
+                        <%if(usuario.getImagem() == null){ %>
+                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle img-responsive">
+                        <%}else{ %>
+                            <img src="../Fotos/<%=usuario.getImagem() %>" width="200" height="160" class="img-circle img-responsive">
+                        <%} %>
                     </div>
                     <div class="col-md-10">
                         <h3 class="text-left">
-                            <b>Ursinha</b>
+                            <b><%=usuario.getNome() %></b>&nbsp;<a href="updUsuario.jsp?codigo=<%=usuario.getCodigo()%>" class="btn btn-primary"><img src="css/ic_edit.png" ></a> <!--Separa o botão do editar do de excluir --> <button class="btn btn-primary" data-toggle="modal" data-target="#myModalUsuario" onclick="codigo=<%=usuario.getCodigo()%>"><img src="css/ic_delete.png"></button>   
+                        
                         </h3>
+                            
                         <!--<p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p> -->
-                        <p>Residente na rua 14 número 1014</p>
-                        <p>Vila Operária - Candiota - RS</p>
-                        <p>CEP: 96495-000</p>
-                        <p>Amante de rosas e chás, sobrevive do amor de sua família e sua filhotinha
-                            Florzinha. Sempre de boas, adora lagartear no sol e tomar um matezinho!</p>
+                        <p><%=usuario.getEmail() %></p>
+                        <p>Residente na <%=usuario.getEndereco() %></p>
+                        <p><%=usuario.getBairro() %> - <%=usuario.getCidade() %> - <%=usuario.getEstado() %></p>
+                        <p>CEP: <%=usuario.getCep() %></p>
+                        
                     </div>
                 </div>
             </div>
@@ -131,5 +141,5 @@
                 </div>
             </div>
         </div>
-
+<%@include file="modalExcluirUsuario.jsp" %>
 <%@include file="rodape.jsp"%>

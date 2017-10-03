@@ -18,6 +18,7 @@
     
     CategoriaDAO Cdao = new CategoriaDAO();
     List<Categoria> Clista = Cdao.listar();
+    
 %>
   <body>
     <div class="navbar navbar-default navbar-static-top">
@@ -25,7 +26,7 @@
         <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse"></button>
-          <a class="navbar-brand" href="index.jsp"><span><img src="css/logo.png" height="34" width="83"></span></a>
+          <a class="brand" href="index.jsp"><span><img src="css/home.png" height="26" width="50" class="img-circle img-responsive"></span></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -52,15 +53,30 @@
             <li>
               <a href="#">Contato</a>
             </li>
-            <li>
-              <a href="login.jsp">Meu Perfil</a>
+            <li class="dropdown">
+                <%if (session.getAttribute("usuario") != null) { %>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria<span></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="addCategoria.jsp">Add Categoria</a></li>
+                        <li><a href="gerenciarCategoria.jsp">Gerenciar Categoria</a></li>
+                    </ul>
+                <%} %>
             </li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria<span></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="addCategoria.jsp">Add Categoria</a></li>
-                    <li><a href="gerenciarCategoria.jsp">Gerenciar Categoria</a></li>
-                </ul>
+                <%if (session.getAttribute("usuario") != null) { %>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Planta<span></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="addPlanta.jsp">Add Planta</a></li>
+                        <li><a href="gerenciarPlanta.jsp">Gerenciar Planta</a></li>
+                    </ul>
+                <%} %>
+            </li>
+            <li> 
+                <%if (session.getAttribute("usuario") == null) { %>
+                    <a href="login.jsp"><img src="css/person.png"></a>
+                <%}else{ %>
+                    <a href="meuPerfil.jsp"><img src="css/person.png" ></a>
+                <%}%>
             </li>
           </ul>
         </div>
