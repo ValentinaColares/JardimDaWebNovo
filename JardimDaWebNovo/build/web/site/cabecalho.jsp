@@ -1,3 +1,5 @@
+<%@page import="modelo.Planta"%>
+<%@page import="dao.PlantaDAO"%>
 <%@page import="dao.CategoriaDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Categoria"%>
@@ -18,6 +20,14 @@
     
     CategoriaDAO Cdao = new CategoriaDAO();
     List<Categoria> Clista = Cdao.listar();
+    
+    PlantaDAO Pdao = new PlantaDAO();
+    List<Planta> Plista;
+    
+    if (request.getParameter("txtFiltro") != null) {
+        Plista = Pdao.listar(request.getParameter("txtFiltro"));
+        
+    }
     
 %>
   <body>
@@ -84,7 +94,7 @@
             <li>
                 <nav class="navbar navbar-light bg-light justify-content-between">
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="text" name="txtPesquisar" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="text" name="txtFiltro" placeholder="Search" aria-label="Search">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </form>
                 </nav>

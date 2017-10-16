@@ -1,12 +1,11 @@
-<%@page import="dao.PlantaDAO"%>
-<%@page import="modelo.Planta"%>
+
 <%@include file="cabecalho.jsp"%>
 <link href="../listaPlanta.css" rel="stylesheet" type="text/css">
 
 <%
     Planta obj = new Planta();
     PlantaDAO dao = new PlantaDAO();
-    List <Planta> Plista = dao.listar();
+    Plista = dao.listar();
    
     if(request.getParameter("categoria")!= null){
         Plista = dao.listarFiltro(Integer.parseInt(request.getParameter("categoria")), "C");

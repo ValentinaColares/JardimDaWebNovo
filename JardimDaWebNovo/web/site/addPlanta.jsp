@@ -2,8 +2,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="util.Upload"%>
-<%@page import="dao.PlantaDAO"%>
-<%@page import="modelo.Planta"%>
 <%@include file="cabecalho.jsp"%>
 <link href="../addPlanta.css" rel="stylesheet" type="text/css">
 

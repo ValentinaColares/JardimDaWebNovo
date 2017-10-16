@@ -13,11 +13,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,6 +28,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "doacao")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Doacao.findAll", query = "SELECT d FROM Doacao d")
     , @NamedQuery(name = "Doacao.findByCodigo", query = "SELECT d FROM Doacao d WHERE d.codigo = :codigo")
@@ -41,6 +45,9 @@ public class Doacao implements Serializable {
     @Column(name = "data_doacao")
     @Temporal(TemporalType.DATE)
     private Date dataDoacao;
+    @JoinColumn(name = "codigo_itensdoacao", referencedColumnName = "codigo")
+    @ManyToOne(optional = false)
+    private Itensdoacao codigoItensdoacao;
 
     public Doacao() {
     }
@@ -68,6 +75,14 @@ public class Doacao implements Serializable {
 
     public void setDataDoacao(Date dataDoacao) {
         this.dataDoacao = dataDoacao;
+    }
+
+    public Itensdoacao getCodigoItensdoacao() {
+        return codigoItensdoacao;
+    }
+
+    public void setCodigoItensdoacao(Itensdoacao codigoItensdoacao) {
+        this.codigoItensdoacao = codigoItensdoacao;
     }
 
     @Override

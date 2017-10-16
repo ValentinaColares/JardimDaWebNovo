@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package modelo;
 
 import java.io.Serializable;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,6 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usuario")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findByCodigo", query = "SELECT u FROM Usuario u WHERE u.codigo = :codigo")
@@ -41,7 +45,6 @@ import javax.persistence.Table;
     , @NamedQuery(name = "Usuario.findByImagem", query = "SELECT u FROM Usuario u WHERE u.imagem = :imagem")
     , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :filtro")
     , @NamedQuery(name = "Usuario.findFilter", query = "SELECT u FROM Usuario u WHERE u.nome like :filtro")
-
 })
 public class Usuario implements Serializable {
 
@@ -191,6 +194,7 @@ public class Usuario implements Serializable {
         this.imagem = imagem;
     }
 
+    @XmlTransient
     public List<Planta> getPlantaList() {
         return plantaList;
     }
@@ -199,6 +203,7 @@ public class Usuario implements Serializable {
         this.plantaList = plantaList;
     }
 
+    @XmlTransient
     public List<Sugestao> getSugestaoList() {
         return sugestaoList;
     }
@@ -231,5 +236,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "modelo.Usuario[ codigo=" + codigo + " ]";
     }
-    
+
 }

@@ -6,7 +6,9 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,6 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "itensdoacao")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Itensdoacao.findAll", query = "SELECT i FROM Itensdoacao i")
     , @NamedQuery(name = "Itensdoacao.findByCodigo", query = "SELECT i FROM Itensdoacao i WHERE i.codigo = :codigo")
@@ -39,6 +45,8 @@ public class Itensdoacao implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantidade")
     private int quantidade;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoItensdoacao")
+    private List<Doacao> doacaoList;
     @JoinColumn(name = "codigo_planta", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
     private Planta codigoPlanta;
@@ -69,6 +77,15 @@ public class Itensdoacao implements Serializable {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    @XmlTransient
+    public List<Doacao> getDoacaoList() {
+        return doacaoList;
+    }
+
+    public void setDoacaoList(List<Doacao> doacaoList) {
+        this.doacaoList = doacaoList;
     }
 
     public Planta getCodigoPlanta() {

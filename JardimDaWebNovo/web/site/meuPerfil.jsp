@@ -18,7 +18,7 @@
         usuario = ((Usuario) session.getAttribute("usuario"));
     
         
-        if (request.getParameter("txtPesquisar") != null) {
+        if (request.getParameter("txtFiltro") != null) {
             lista = dao.listar(request.getParameter("txtFiltro"));
 
         } else{ 
@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-md-10">
                         <h3 class="text-left">
-                            <b><%=usuario.getNome() %></b>&nbsp;<a href="updUsuario.jsp?codigo=<%=usuario.getCodigo() %>" class="btn btn-primary"><img src="css/ic_edit.png" ></a> <!-- Separa o botão do editar do de excluir --> <button class="btn btn-primary" data-toggle="modal" data-target="#myModalUsuario" onclick="codigo=<%=usuario.getCodigo() %>"><img src="css/ic_delete.png"></button>
+                            <b><%=usuario.getNome() %></b>&nbsp;<a href="updUsuario.jsp?codigo=<%=usuario.getCodigo() %>" class="btn btn-primary"><img src="css/ic_edit.png" ></a> <!-- Separa o botão do editar do de excluir --> <button class="btn btn-primary" data-toggle="modal" data-target="#myModalUsuario" onclick="codigo=<%=usuario.getCodigo() %>"><img src="css/ic_delete.png"></button> <!-- --><button class="btn btn-primary" data-toggle="modal" data-target="#myModalUsuario" onclick="codigo=<%=usuario.getCodigo() %>"><img src="css/ic_logout.png"></button>
                         
                         </h3>
                             

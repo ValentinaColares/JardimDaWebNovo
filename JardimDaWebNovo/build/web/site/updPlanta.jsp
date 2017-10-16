@@ -1,5 +1,4 @@
-<%@page import="modelo.Planta"%>
-<%@page import="dao.PlantaDAO"%>
+
 <%@page import="util.Upload"%>
 <%@include file="cabecalho.jsp"%>
 <link href="../updPlanta.css" rel="stylesheet" type="text/css">

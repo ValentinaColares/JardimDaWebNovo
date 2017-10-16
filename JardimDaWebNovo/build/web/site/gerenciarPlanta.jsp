@@ -1,7 +1,5 @@
 
-<%@page import="java.util.List"%>
-<%@page import="dao.PlantaDAO"%>
-<%@page import="modelo.Planta"%>
+
 <%@include file="cabecalho.jsp"%>
 <link href="../gerenciarPlanta.css" rel="stylesheet" type="text/css">
 
@@ -12,7 +10,7 @@
     List<Planta> lista = dao.listar();
     
     if (request.getParameter("txtFiltro") != null) {
-        //lista = dao.listar(request.getParameter("txtFiltro"));
+        lista = dao.listar(request.getParameter("txtFiltro"));
         
     } else{ 
    
