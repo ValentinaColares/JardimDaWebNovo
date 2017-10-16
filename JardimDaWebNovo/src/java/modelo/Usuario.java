@@ -27,10 +27,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuario")
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :filtro"),
-    @NamedQuery(name = "Usuario.findFilter", query = "SELECT u FROM Usuario u WHERE u.nome like :filtro")
-    })
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+    , @NamedQuery(name = "Usuario.findByCodigo", query = "SELECT u FROM Usuario u WHERE u.codigo = :codigo")
+    , @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome")
+    , @NamedQuery(name = "Usuario.findByCidade", query = "SELECT u FROM Usuario u WHERE u.cidade = :cidade")
+    , @NamedQuery(name = "Usuario.findByEstado", query = "SELECT u FROM Usuario u WHERE u.estado = :estado")
+    , @NamedQuery(name = "Usuario.findByBairro", query = "SELECT u FROM Usuario u WHERE u.bairro = :bairro")
+    , @NamedQuery(name = "Usuario.findByEndereco", query = "SELECT u FROM Usuario u WHERE u.endereco = :endereco")
+    , @NamedQuery(name = "Usuario.findByCep", query = "SELECT u FROM Usuario u WHERE u.cep = :cep")
+    //, @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
+    , @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")
+    , @NamedQuery(name = "Usuario.findByDoador", query = "SELECT u FROM Usuario u WHERE u.doador = :doador")
+    , @NamedQuery(name = "Usuario.findByImagem", query = "SELECT u FROM Usuario u WHERE u.imagem = :imagem")
+    , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :filtro")
+    , @NamedQuery(name = "Usuario.findFilter", query = "SELECT u FROM Usuario u WHERE u.nome like :filtro")
+
+})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,7 +66,6 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "endereco")
     private String endereco;
-    @Basic(optional = false)
     @Column(name = "cep")
     private String cep;
     @Basic(optional = false)
@@ -80,14 +91,13 @@ public class Usuario implements Serializable {
         this.codigo = codigo;
     }
 
-    public Usuario(Integer codigo, String nome, String cidade, String estado, String bairro, String endereco, String cep, String email, String senha, boolean doador) {
+    public Usuario(Integer codigo, String nome, String cidade, String estado, String bairro, String endereco, String email, String senha, boolean doador) {
         this.codigo = codigo;
         this.nome = nome;
         this.cidade = cidade;
         this.estado = estado;
         this.bairro = bairro;
         this.endereco = endereco;
-        this.cep = cep;
         this.email = email;
         this.senha = senha;
         this.doador = doador;

@@ -70,7 +70,7 @@ public abstract class GenericDAO<T, I extends Serializable> {
         } catch (RuntimeException e) {
             em.getTransaction().rollback();
             retorno = false;
-            throw e;
+            e.printStackTrace();
         } finally {
             // em.close();
         }

@@ -6,7 +6,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -23,8 +22,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -43,7 +40,10 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "Planta.findByDescricao", query = "SELECT p FROM Planta p WHERE p.descricao = :descricao")
     , @NamedQuery(name = "Planta.findByDataPlanta", query = "SELECT p FROM Planta p WHERE p.dataPlanta = :dataPlanta")
     , @NamedQuery(name = "Planta.findByQuantidade", query = "SELECT p FROM Planta p WHERE p.quantidade = :quantidade")
-    , @NamedQuery(name = "Planta.findByImagem", query = "SELECT p FROM Planta p WHERE p.imagem = :imagem")})
+    , @NamedQuery(name = "Planta.findByImagem", query = "SELECT p FROM Planta p WHERE p.imagem = :imagem")
+    , @NamedQuery(name = "Planta.findCodCategoria", query = "SELECT p FROM Planta p WHERE p.codigoCategoria.codigo = :codigo")
+    , @NamedQuery(name = "Planta.findFilter", query = "SELECT p FROM Planta p WHERE p.nomePopular like :filtro or p.nomeCientifico like :filtro or p.codigoCategoria.nome like :filtro")
+})
 public class Planta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,12 +66,10 @@ public class Planta implements Serializable {
     @Column(name = "descricao")
     private String descricao;
     @Column(name = "data_planta")
-    @Temporal(TemporalType.DATE)
-    private Date dataPlanta;
+    private String dataPlanta;
     @Basic(optional = false)
     @Column(name = "quantidade")
     private int quantidade;
-    @Basic(optional = false)
     @Column(name = "imagem")
     private String imagem;
     @JoinTable(name = "inventario", joinColumns = {
@@ -92,11 +90,10 @@ public class Planta implements Serializable {
         this.codigo = codigo;
     }
 
-    public Planta(Integer codigo, String nomePopular, int quantidade, String imagem) {
+    public Planta(Integer codigo, String nomePopular, int quantidade) {
         this.codigo = codigo;
         this.nomePopular = nomePopular;
         this.quantidade = quantidade;
-        this.imagem = imagem;
     }
 
     public Integer getCodigo() {
@@ -155,11 +152,11 @@ public class Planta implements Serializable {
         this.descricao = descricao;
     }
 
-    public Date getDataPlanta() {
+    public String getDataPlanta() {
         return dataPlanta;
     }
 
-    public void setDataPlanta(Date dataPlanta) {
+    public void setDataPlanta(String dataPlanta) {
         this.dataPlanta = dataPlanta;
     }
 

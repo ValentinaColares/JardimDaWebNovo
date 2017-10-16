@@ -10,7 +10,7 @@
               <b>Jardim da Web</b>
             </h1>
             <p>
-              <b>Um novo jeito de cuidar a sua saúde.</b>
+              <b>Um novo jeito de cuidar da sua saúde.</b>
             </p>
             <br>
             <br>

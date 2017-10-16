@@ -41,6 +41,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
+            <div class="panel-body">
+                <a  href="addPlanta.jsp" class="btn  btn-primary btn-sm fa fa-plus-square-o" >Novo</a>
+            </div>
             <table class="table">
               <thead class="thead-inverse">
                 <tr>
@@ -52,6 +55,7 @@
                   <th>Época de Poda</th>
                   <th>Quantidade</th>
                   <th>Categoria</th>
+                  <th>Data</th>
                   <th>Imagem</th>
                   <th>Ações</th>
                 </tr>
@@ -68,6 +72,7 @@
                     <td><%=item.getEpocaPoda()%></td>
                     <td><%=item.getQuantidade()%></td>
                     <td><%=item.getCodigoCategoria().getNome() %></td>
+                    <td><%=item.getDataPlanta() %></td>
                     <td><img src="../Fotos/<%=item.getImagem() %>" width="40" height="40" /> </td>
                     <td><a href="updPlanta.jsp?codigo=<%=item.getCodigo()%>" class="btn  btn-danger btn-sm">Alterar</a>
                         <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModalPlanta" onclick="codigo=<%=item.getCodigo()%>">Excluir</button> 

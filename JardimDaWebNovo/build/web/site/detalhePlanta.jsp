@@ -1,5 +1,15 @@
+<%@page import="dao.PlantaDAO"%>
+<%@page import="modelo.Planta"%>
 <%@include file="cabecalho.jsp"%>
 <link href="../detalhePlanta.css" rel="stylesheet" type="text/css">
+
+<% 
+    Planta obj = new Planta();
+    PlantaDAO dao = new PlantaDAO();
+    obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+    
+    
+%>
 
     <div class="section">
       <div class="container">
@@ -14,28 +24,32 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
+            <%if(obj.getImagem() == null){ %>
+                <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
+            <%} else if(obj.getImagem() != null){ %>
+                <img src="../Fotos/<%=obj.getImagem() %>" class="img-responsive">
+            <%}%>
           </div>
           <div class="col-md-6">
             <strong>
-              <h1>Rosa</h1>
+              <h1><%=obj.getNomePopular() %></h1>
             </strong>
-            <h3>Rosa Galica</h3>
+            <h3><%=obj.getNomeCientifico()%></h3>
             <ul>
               <li>
-                <strong>Categoria</strong>: Flor</li>
+                <strong>Categoria</strong>: <%=obj.getCodigoCategoria().getNome() %></li>
               <li>
-                <strong>Origem</strong>: Asiática</li>
+                <strong>Origem</strong>: <%=obj.getOrigem()%>.</li>
               <li>
-                <strong>Propagação</strong>: Enraizamento por estaquia</li>
+                <strong>Propagação</strong>: <%=obj.getPropagacao()%>.</li>
               <li>
-                <strong>Época de poca</strong>:Não há uma época especial para fazer essa poda,
-                mas evite o alto inverno para que os futuros brotos não queimem com a geada.</li>
+                <strong>Época de poca</strong>: <%=obj.getEpocaPoda()%>.</li>
               <li>
-                <strong>Descrição</strong>: As pétalas da rosa são ricas em vitamina C, por essa
-                razão ajudam a tonificar o sistema imunológico do organismo. A bebida,
-                também possui poucas calorias não interferindo na alimentação ou dietas
-                de seus consumidores.</li>
+                <strong>Quantidade</strong>: <%=obj.getQuantidade()%></li>
+              <li>
+                <strong>Data da Planta</strong>: <%=obj.getDataPlanta()%></li>
+              <li>
+                <strong>Descrição</strong>: <%=obj.getDescricao()%></li>
             </ul>
           </div>
         </div>

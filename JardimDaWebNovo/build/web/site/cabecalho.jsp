@@ -30,8 +30,9 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
+            <!-- Categoria -->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorias<span></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Plantas<span></span></a>
                 <ul class="dropdown-menu">
                     <%for(Categoria Citem: Clista){ %>
                         <li><a class="list" href="listaPlanta.jsp?categoria=<%=Citem.getCodigo()%>"><%=Citem.getNome() %></a></li>
@@ -78,7 +79,20 @@
                     <a href="meuPerfil.jsp"><img src="css/person.png" ></a>
                 <%}%>
             </li>
+            
+            
+            <li>
+                <nav class="navbar navbar-light bg-light justify-content-between">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="text" name="txtPesquisar" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
+                </nav>
+            </li>
           </ul>
+            
         </div>
       </div>
     </div>
+
+<%@include file="modalExcluirUsuario.jsp" %>

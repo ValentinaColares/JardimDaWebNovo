@@ -1,5 +1,23 @@
+<%@page import="dao.PlantaDAO"%>
+<%@page import="modelo.Planta"%>
 <%@include file="cabecalho.jsp"%>
 <link href="../listaPlanta.css" rel="stylesheet" type="text/css">
+
+<%
+    Planta obj = new Planta();
+    PlantaDAO dao = new PlantaDAO();
+    List <Planta> Plista = dao.listar();
+   
+    if(request.getParameter("categoria")!= null){
+        Plista = dao.listarFiltro(Integer.parseInt(request.getParameter("categoria")), "C");
+    }
+    else{
+        Plista = dao.listar();
+    }
+    
+
+
+%>
 
     <div class="section">
             <div class="container">
@@ -14,33 +32,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-                        <h2>Rosa</h2>
-                        <h4>Rosa Galicum</h4>
-                        <p>Flor</p>
-                        <p>Descrição</p>
+                        <%
+                            for(Planta Pitem : Plista){
+                         %>
+                        
+                            <%if(Pitem.getImagem() == null){ %>    
+                            <a href="detalhePlanta.jsp?codigo=<%=Pitem.getCodigo()%>"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive"></a>
+                            <%} else if(Pitem.getImagem() != null){ %>
+                            <a href="detalhePlanta.jsp?codigo=<%=Pitem.getCodigo()%>"><img src="../Fotos/<%=Pitem.getImagem() %>" class="img-responsive"></a>
+                            <% } %>
+                            <h2><%=Pitem.getNomePopular() %></h2>
+                            <h4><%=Pitem.getNomeCientifico()%></h4>
+                            <p><%=Pitem.getCodigoCategoria().getNome() %></p>
+                            <p><%=Pitem.getDescricao()%></p>
+                        <% } %>
                     </div>
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-                        <h2>Boldo Brasileiro</h2>
-                        <h4>Boldos</h4>
-                        <p>Erva - Chá</p>
-                        <p>Descrição</p>
-                    </div>
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive img-rounded">
-                        <h2>Cenoura</h2>
-                        <h4>Cenouraus</h4>
-                        <p>Legume</p>
-                        <p>Descrição</p>
-                    </div>
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-                        <h2>Cenoura</h2>
-                        <h4>Cenouraus</h4>
-                        <p>Legume</p>
-                        <p>Descrição</p>
-                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -29,9 +29,9 @@
                 response.sendRedirect("index.jsp");
                 return;  
             } 
-            //Gravar produto do banco
+            //Gravar usuario do banco
 
-            //Monto o objeto com os dados para sem inserir
+            //Monto o objeto com os dados para sim inserir
             obj.setNome(up.getForm().get("txtNome").toString());
             obj.setCidade(up.getForm().get("txtCidade").toString());
             obj.setBairro(up.getForm().get("txtBairro").toString());
@@ -39,6 +39,7 @@
             obj.setEndereco(up.getForm().get("txtEndereco").toString());
             obj.setCep(up.getForm().get("txtCep").toString());
             obj.setEmail(up.getForm().get("txtEmail").toString());
+            
             obj.setSenha(Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString()));
 
             if(up.getForm().get("txtDoador") != null){
@@ -55,7 +56,7 @@
         }
     
         if(resultado){
-            response.sendRedirect("meuPerfil.jsp");
+            response.sendRedirect("login.jsp");
         }
     }
 
