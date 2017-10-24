@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Planta.findByDataPlanta", query = "SELECT p FROM Planta p WHERE p.dataPlanta = :dataPlanta")
     , @NamedQuery(name = "Planta.findByQuantidade", query = "SELECT p FROM Planta p WHERE p.quantidade = :quantidade")
     , @NamedQuery(name = "Planta.findByImagem", query = "SELECT p FROM Planta p WHERE p.imagem = :imagem")
+    , @NamedQuery(name = "Planta.findCodCategoria", query = "SELECT p FROM Planta p WHERE p.codigoCategoria.codigo = :codigo")
     , @NamedQuery(name = "Planta.findFilter", query = "SELECT p FROM Planta p WHERE p.nomePopular like :filtro or p.nomeCientifico like :filtro or p.codigoCategoria.nome like :filtro")
 })
 public class Planta implements Serializable {

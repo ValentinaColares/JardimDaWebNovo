@@ -1,4 +1,26 @@
 
+<%@page import="modelo.Sugestao"%>
+<%@page import="dao.SugestaoDAO"%>
+<%
+    SugestaoDAO dao = new SugestaoDAO();
+    Sugestao obj = new Sugestao();
+    
+    Boolean resultado = false;
+    
+    if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+    
+    } else{  
+        if(request.getParameter("txtSugestao") != null){
+            obj.setSugestao(request.getParameter("txtSugestao"));
+            resultado = dao.incluir(obj);
+        }
+
+        if(resultado){
+            //response.sendRedirect("gerenciarSugestao.jsp");
+        }
+    }
+%>
     <footer class="section section-primary">
         <div class="container">
         <div class="row">

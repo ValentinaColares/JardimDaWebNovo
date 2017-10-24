@@ -22,14 +22,14 @@
     <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4 single-grid">
             <%if(obj.getImagem() == null){ %>
                 <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
             <%} else if(obj.getImagem() != null){ %>
-                <img src="../Fotos/<%=obj.getImagem() %>" class="img-responsive">
+                <img src="../Fotos/<%=obj.getImagem() %>" width="360" height="280">
             <%}%>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4 single-grid simpleCart_shelfItem">
             <strong>
               <h1><%=obj.getNomePopular() %></h1>
             </strong>
@@ -38,7 +38,7 @@
               <li>
                 <strong>Categoria</strong>: <%=obj.getCodigoCategoria().getNome() %></li>
               <li>
-                <strong>Origem</strong>: <%=obj.getOrigem()%>.</li>
+                  <strong>Origem</strong>: <%=obj.getOrigem()%>.</li>
               <li>
                 <strong>Propagação</strong>: <%=obj.getPropagacao()%>.</li>
               <li>

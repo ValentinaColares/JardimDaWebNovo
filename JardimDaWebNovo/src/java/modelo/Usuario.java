@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package modelo;
 
 import java.io.Serializable;
@@ -236,5 +235,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "modelo.Usuario[ codigo=" + codigo + " ]";
     }
-
+    
 }
