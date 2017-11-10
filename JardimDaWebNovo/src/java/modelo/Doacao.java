@@ -20,7 +20,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,11 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "doacao")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Doacao.findAll", query = "SELECT d FROM Doacao d")
-    , @NamedQuery(name = "Doacao.findByCodigo", query = "SELECT d FROM Doacao d WHERE d.codigo = :codigo")
-    , @NamedQuery(name = "Doacao.findByDataDoacao", query = "SELECT d FROM Doacao d WHERE d.dataDoacao = :dataDoacao")})
+    @NamedQuery(name = "Doacao.findAll", query = "SELECT d FROM Doacao d")})
 public class Doacao implements Serializable {
 
     private static final long serialVersionUID = 1L;

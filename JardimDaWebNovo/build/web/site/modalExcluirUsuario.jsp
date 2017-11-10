@@ -25,6 +25,7 @@
     var codigo;
     function excluir(){
         document.location.href = "meuPerfil.jsp?codigo="+codigo;
+        window.location.href = "excluir.jsp";
     }
 </script>
 

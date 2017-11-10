@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,11 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "sugestao")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Sugestao.findAll", query = "SELECT s FROM Sugestao s")
-    , @NamedQuery(name = "Sugestao.findByCodigo", query = "SELECT s FROM Sugestao s WHERE s.codigo = :codigo")
-    , @NamedQuery(name = "Sugestao.findBySugestao", query = "SELECT s FROM Sugestao s WHERE s.sugestao = :sugestao")})
+    @NamedQuery(name = "Sugestao.findAll", query = "SELECT s FROM Sugestao s")})
 public class Sugestao implements Serializable {
 
     private static final long serialVersionUID = 1L;

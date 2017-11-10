@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <!-- Modal -->
-<div class="modal fade" id="myModalUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModalSugestao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -24,8 +24,7 @@
 <script>
     var codigo;
     function excluir(){
-        document.location.href = "meuPerfil.jsp?codigo="+codigo;
-        window.location.href = "excluir.jsp";
+        document.location.href = "gerenciarSugestao.jsp?codigo="+codigo;
     }
 </script>
 

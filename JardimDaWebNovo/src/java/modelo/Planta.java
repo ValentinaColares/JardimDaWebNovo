@@ -22,8 +22,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,21 +29,10 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "planta")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Planta.findAll", query = "SELECT p FROM Planta p")
-    , @NamedQuery(name = "Planta.findByCodigo", query = "SELECT p FROM Planta p WHERE p.codigo = :codigo")
-    , @NamedQuery(name = "Planta.findByNomePopular", query = "SELECT p FROM Planta p WHERE p.nomePopular = :nomePopular")
-    , @NamedQuery(name = "Planta.findByNomeCientifico", query = "SELECT p FROM Planta p WHERE p.nomeCientifico = :nomeCientifico")
-    , @NamedQuery(name = "Planta.findByOrigem", query = "SELECT p FROM Planta p WHERE p.origem = :origem")
-    , @NamedQuery(name = "Planta.findByPropagacao", query = "SELECT p FROM Planta p WHERE p.propagacao = :propagacao")
-    , @NamedQuery(name = "Planta.findByEpocaPoda", query = "SELECT p FROM Planta p WHERE p.epocaPoda = :epocaPoda")
-    , @NamedQuery(name = "Planta.findByDescricao", query = "SELECT p FROM Planta p WHERE p.descricao = :descricao")
-    , @NamedQuery(name = "Planta.findByDataPlanta", query = "SELECT p FROM Planta p WHERE p.dataPlanta = :dataPlanta")
-    , @NamedQuery(name = "Planta.findByQuantidade", query = "SELECT p FROM Planta p WHERE p.quantidade = :quantidade")
-    , @NamedQuery(name = "Planta.findByImagem", query = "SELECT p FROM Planta p WHERE p.imagem = :imagem")
-    , @NamedQuery(name = "Planta.findCodCategoria", query = "SELECT p FROM Planta p WHERE p.codigoCategoria.codigo = :codigo")
-    , @NamedQuery(name = "Planta.findFilter", query = "SELECT p FROM Planta p WHERE p.nomePopular like :filtro or p.nomeCientifico like :filtro or p.codigoCategoria.nome like :filtro")
+    @NamedQuery(name = "Planta.findAll", query = "SELECT p FROM Planta p"),
+    @NamedQuery(name = "Planta.findCodCategoria", query = "SELECT p FROM Planta p WHERE p.codigoCategoria.codigo = :codigo"),
+    @NamedQuery(name = "Planta.findFilter", query = "SELECT p FROM Planta p WHERE p.nomePopular like :filtro or p.nomeCientifico like :filtro or p.codigoCategoria.nome like :filtro")
 })
 public class Planta implements Serializable {
 
@@ -179,7 +166,6 @@ public class Planta implements Serializable {
         this.imagem = imagem;
     }
 
-    @XmlTransient
     public List<Usuario> getUsuarioList() {
         return usuarioList;
     }
@@ -196,7 +182,6 @@ public class Planta implements Serializable {
         this.codigoCategoria = codigoCategoria;
     }
 
-    @XmlTransient
     public List<Itensdoacao> getItensdoacaoList() {
         return itensdoacaoList;
     }

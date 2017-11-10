@@ -1,3 +1,4 @@
+
 <%@page import="modelo.Planta"%>
 <%@page import="dao.PlantaDAO"%>
 <%@page import="dao.CategoriaDAO"%>
@@ -15,6 +16,7 @@
     <link href="css/css da index.css" rel="stylesheet" type="text/css">
   </head>
 <% 
+    
     Usuario usuario = new Usuario();
     UsuarioDAO Usuariodao = new UsuarioDAO();
     
@@ -61,9 +63,6 @@
                     <li><a href="listaDoacao.jsp">PANC's</a></li>
                 </ul>
             </li>
-            <li>
-              <a href="#">Contato</a>
-            </li>
             <li class="dropdown">
                 <%if (session.getAttribute("usuario") != null) { %>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria<span></span></a>
@@ -82,6 +81,9 @@
                     </ul>
                 <%} %>
             </li>
+            <li>
+              <a href="#">Contato</a>
+            </li>
             <li> 
                 <%if (session.getAttribute("usuario") == null) { %>
                     <a href="login.jsp"><img src="css/person.png"></a>
@@ -89,7 +91,14 @@
                     <a href="meuPerfil.jsp"><img src="css/person.png" ></a>
                 <%}%>
             </li>
-            
+            <li class="dropdown">
+                <%if (session.getAttribute("usuario") != null) { %>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="css/ic_con.png"><span></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="sair.jsp">Sair</a></li>
+                    </ul>
+                <%} %>
+            </li>
             
             <li>
                 <nav class="navbar navbar-light bg-light justify-content-between">
@@ -105,4 +114,3 @@
       </div>
     </div>
 
-<%@include file="modalExcluirUsuario.jsp" %>
