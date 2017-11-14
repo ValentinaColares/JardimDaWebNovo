@@ -13,40 +13,64 @@
     <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
-            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-            <h2>Rosa</h2>
-            <h4>Rosa Galicum</h4>
-            <p>Flor</p>
-            <p>
-              <strong>Doadora:</strong>Ursinha</p>
-            <p>Candiota - RS</p>
-          </div>
-          <div class="col-md-3">
-            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-            <h2>Boldo Brasileiro</h2>
-            <h4>Boldos</h4>
-            <p>Erva - Chá</p>
-            <p>
-              <strong>Doadora:</strong>Florzinha</p>
-            <p>Bagé - RS</p>
-          </div>
-          <div class="col-md-3">
-            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive img-rounded">
-            <h2>Cenoura</h2>
-            <h4>Cenouraus</h4>
-            <p>Legume</p>
-            <p><strong>Doador:</strong> Tom</p>
-            <p>Porto Alegre - RS</p>
-          </div>
-          <div class="col-md-3">
-            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive img-rounded">
-            <h2>Cenoura</h2>
-            <h4>Cenouraus</h4>
-            <p>Legume</p>
-            <p><strong>Doador:</strong> Tom</p>
-            <p>Porto Alegre - RS</p>
-          </div>
+            <div class="row text-center">
+
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/800x500" alt="">
+                        <div class="caption">
+                            <h3>Feature Label</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p>
+                                <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/800x500" alt="">
+                        <div class="caption">
+                            <h3>Feature Label</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p>
+                                <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/800x500" alt="">
+                        <div class="caption">
+                            <h3>Feature Label</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p>
+                                <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <a href="detalheDoacao.jsp"><img src="http://placehold.it/800x500" alt=""></a>
+                        <div class="caption">
+                            <h2>Boldo Brasileiro</h2>
+                            <h4>Boldos</h4>
+                            <p>Erva - Chá</p>
+                            <p>
+                              <strong>Doadora:</strong>Florzinha</p>
+                            <p>Bagé - RS</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          
         </div>
       </div>
     </div>
