@@ -4,10 +4,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>modelo.Sugestao</class>
     <class>modelo.Usuario</class>
-    <class>modelo.Doacao</class>
     <class>modelo.Categoria</class>
     <class>modelo.Planta</class>
     <class>modelo.Itensdoacao</class>
+    <class>modelo.Doacao</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jardimDaVal"/>

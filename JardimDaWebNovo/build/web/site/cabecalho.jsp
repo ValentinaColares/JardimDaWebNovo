@@ -66,6 +66,12 @@
                         <li><a href="listaDoacao.jsp">Verduras</a></li>
                         <li><a href="listaDoacao.jsp">Legumes</a></li>
                         <li><a href="listaDoacao.jsp">PANC's</a></li>
+                        
+                        <%if (session.getAttribute("usuario") != null) { %>
+                        <hr size="1" width="50%" align="center">
+                            <li><a href="addDoacao.jsp">Cadastrar</a></li>
+                            <li><a href="gerenciarDoacao.jsp">Gerenciar</a></li>
+                        <%} %>
                     </ul>
                 </li>
                 <li class="dropdown">

@@ -1,15 +1,18 @@
+
+<%@page import="dao.DoacaoDAO"%>
+<%@page import="modelo.Doacao"%>
 <%@page import="dao.ItensdoacaoDAO"%>
 <%@page import="modelo.Itensdoacao"%>
 <%@page import="util.Data"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="util.Upload"%>
 <%@include file="cabecalho.jsp"%>
 <link href="../addPlanta.css" rel="stylesheet" type="text/css">
 
 <% 
-    Itensdoacao obj = new Itensdoacao();
-    ItensdoacaoDAO dao = new ItensdoacaoDAO();
+    Itensdoacao Iobj = new Itensdoacao();
+    ItensdoacaoDAO ITdao = new ItensdoacaoDAO();
+    
+    Doacao Dobj = new Doacao();
+    DoacaoDAO Ddao = new DoacaoDAO();
     
     PlantaDAO pDAO = new PlantaDAO();
     List<Planta> plista = pDAO.listar();
@@ -23,24 +26,30 @@
         
         usuario = ((Usuario) session.getAttribute("usuario"));
     
-        if(request.getMethod().equals("POST")){        
-            
+        if(request.getMethod().equals("POST")){  
+            //Itens da doação
+            //set de Planta
             Planta planta = new Planta();    
             planta.setCodigo(Integer.parseInt(request.getParameter("selPlanta")));
-            obj.setCodigoPlanta(planta);
-                        
+            Iobj.setCodigoPlanta(planta); 
+            //set de quantidade
+            Iobj.setQuantidade(Integer.parseInt(request.getParameter("txtQtd")));
+            ITdao.incluir(Iobj);
+            
+            //Doação
+            Dobj.setCodigoItensdoacao(Iobj);
+            //fazendo o add da Data
+            Data d = new Data();
+            Dobj.setDataDoacao(d.getData());  
+            
+            resultado = Ddao.incluir(Dobj);
 
-                resultado = dao.incluir(obj);
-
-            }   
-
-            if(resultado){
-                response.sendRedirect("gerenciarItensdoacao.jsp");
-            }
-
-
-            //Digo que a sessão ta aberta
-        }
+            
+        }   
+        
+        if(resultado){
+            response.sendRedirect("gerenciarDoacao.jsp");
+        }      
     }
 %>
 
@@ -48,7 +57,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center">Cadastrar Doação</h1>
+            <h1 class="text-center">Cadastrar Itensdoacao</h1>
           </div>
         </div>
       </div>
@@ -57,21 +66,25 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="#" method="post">
                 <div class="form-group">
                     <label>Planta</label>
                     <select class="form-control form-control-lg" name="selPlanta">
                         <option value="">Selecione</option>
-                        <%for(Planta plan: plista) {%>
-                        <option value="<%=plan.getCodigo()%>" ><%=plan.getNomePopular()%></option>
-                        <%}%>   
+                        <% 
+                            for(Planta plan: plista) {
+                        %>
+                        <option value="<%=plan.getCodigo() %>" ><%=plan.getNomePopular()%></option>
+                        <% 
+                            }
+                        %>   
                     </select>
                
                 </div>
                 <div class="form-group">
                     <label>Quantidade</label>
-                    <input type="number" name="txtQtd" class="form-control" placeholder="Quantidade de plantas">
-                </div>          
+                    <input type="number" name="txtQtd" class="form-control" placeholder="Quantidade de plantas para doar">
+                </div> 
                 <button type="submit" class="btn btn-primary">Submit</button>
                  
             </form>

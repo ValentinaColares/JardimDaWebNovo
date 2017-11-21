@@ -6,7 +6,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -39,8 +36,7 @@ public class Doacao implements Serializable {
     private Integer codigo;
     @Basic(optional = false)
     @Column(name = "data_doacao")
-    @Temporal(TemporalType.DATE)
-    private Date dataDoacao;
+    private String dataDoacao;
     @JoinColumn(name = "codigo_itensdoacao", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
     private Itensdoacao codigoItensdoacao;
@@ -52,7 +48,7 @@ public class Doacao implements Serializable {
         this.codigo = codigo;
     }
 
-    public Doacao(Integer codigo, Date dataDoacao) {
+    public Doacao(Integer codigo, String dataDoacao) {
         this.codigo = codigo;
         this.dataDoacao = dataDoacao;
     }
@@ -65,11 +61,11 @@ public class Doacao implements Serializable {
         this.codigo = codigo;
     }
 
-    public Date getDataDoacao() {
+    public String getDataDoacao() {
         return dataDoacao;
     }
 
-    public void setDataDoacao(Date dataDoacao) {
+    public void setDataDoacao(String dataDoacao) {
         this.dataDoacao = dataDoacao;
     }
 
