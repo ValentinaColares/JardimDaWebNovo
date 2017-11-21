@@ -1,5 +1,5 @@
-
-    <footer class="section section-primary">
+    
+    <footer id="contato" class="section section-primary">
         <div class="container">
             
             <div class="row">
@@ -8,7 +8,7 @@
                   <h1>Sugestões&nbsp;<%if (session.getAttribute("usuario") != null) { %><a href="gerenciarSugestao.jsp"><img src="css/ic_con.png"><span></span></a> <%}%></h1>
                   <form action="addSugestao.jsp" method="post">
                     <div class="form-group">
-                      <textarea class="form-control" placeholder="Sugestões aqui..." name="txtSugestao"></textarea>
+                      <textarea class="form-control" placeholder="Você pode enviar sugestões por aqui..." name="txtSugestao"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

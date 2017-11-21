@@ -72,8 +72,8 @@
                     <td><%=item.getCodigoCategoria().getNome() %></td>
                     <td><%=item.getDataPlanta() %></td>
                     <td><img src="../Fotos/<%=item.getImagem() %>" width="40" height="40" /> </td>
-                    <td><a href="updPlanta.jsp?codigo=<%=item.getCodigo()%>" class="btn  btn-danger btn-sm">Alterar</a>
-                        <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModalPlanta" onclick="codigo=<%=item.getCodigo()%>">Excluir</button> 
+                    <td><a href="updPlanta.jsp?codigo=<%=item.getCodigo()%>" class="btn btn-primary">Alterar</a>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModalPlanta" onclick="codigo=<%=item.getCodigo()%>">Excluir</button> 
                     </td>
                 </tr>
                 <% } %>

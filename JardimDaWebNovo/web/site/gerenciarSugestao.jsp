@@ -55,8 +55,7 @@
                 <tr>
                   <td><%=item.getCodigo() %></td>
                   <td><%=item.getSugestao()%></td>
-                  <td><a href="updSugestao.jsp?codigo=<%=item.getCodigo()%>" class="btn btn-primary">Alterar</a>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModalSugestao" onclick="codigo=<%=item.getCodigo()%>">Excluir</button></td>
+                  <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModalSugestao" onclick="codigo=<%=item.getCodigo()%>">Excluir</button></td>
                 </tr>
                 <%}%>
               </tbody>
