@@ -77,7 +77,7 @@
                     <td><%=item.getDataDoacao() %></td>
                     <td><%=item.getDoada()%></td>
                     <td><%=item.getDescricao()%></td>
-                    <td><a href="updPlanta.jsp?codigo=<%=item.getCodigo()%>" class="btn btn-primary">Alterar</a>
+                    <td><a href="updDoacao.jsp?codigo=<%=item.getCodigo()%>" class="btn btn-primary">Alterar</a>
                         <button class="btn btn-primary" data-toggle="modal" data-target="#myModalDoacao" onclick="codigo=<%=item.getCodigo()%>">Excluir</button> 
                     </td>
                 </tr>
