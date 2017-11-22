@@ -39,7 +39,7 @@
         <div class="row">
           <div class="col-md-12">
                 <div class="panel-body">
-                    <a  href="addSugestao.jsp" class="btn  btn-primary btn-sm fa fa-plus-square-o" >Novo</a>
+                    <a  href="#contato" class="btn  btn-primary btn-sm fa fa-plus-square-o" >Novo</a>
                 </div>
             <table class="table">
               <thead class="thead-inverse">

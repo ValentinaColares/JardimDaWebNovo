@@ -40,11 +40,13 @@
             Dobj.setCodigoItensdoacao(Iobj);
             //fazendo o add da Data
             Data d = new Data();
-            Dobj.setDataDoacao(d.getData());  
+            Dobj.setDataDoacao(d.getData());
+            Dobj.setDescricao(request.getParameter("txtDescricao"));
+            Dobj.setDoada(false);
+            Dobj.setCodigoUsuario(usuario);
             
             resultado = Ddao.incluir(Dobj);
 
-            
         }   
         
         if(resultado){
@@ -57,7 +59,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center">Cadastrar Itensdoacao</h1>
+            <h1 class="text-center">Cadastrar Doação</h1>
           </div>
         </div>
       </div>
@@ -85,6 +87,10 @@
                     <label>Quantidade</label>
                     <input type="number" name="txtQtd" class="form-control" placeholder="Quantidade de plantas para doar">
                 </div> 
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea class="form-control" name="txtDescricao" placeholder="Descrição da doação"></textarea>
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                  
             </form>

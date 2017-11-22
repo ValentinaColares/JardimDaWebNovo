@@ -1,28 +1,41 @@
 
 
+<%@page import="dao.DoacaoDAO"%>
+<%@page import="modelo.Doacao"%>
+<%@page import="dao.ItensdoacaoDAO"%>
+<%@page import="modelo.Itensdoacao"%>
 <%@include file="cabecalho.jsp"%>
 <link href="../gerenciarPlanta.css" rel="stylesheet" type="text/css">
 
 <%
     //btn  btn-primary btn-sm
-    Planta obj = new Planta();
-    PlantaDAO dao = new PlantaDAO();
-    List<Planta> lista = dao.listar();
+    Itensdoacao Iobj = new Itensdoacao();
+    ItensdoacaoDAO Idao = new ItensdoacaoDAO();
+    List<Itensdoacao> Ilista = Idao.listar();
+    
+    Doacao Dobj = new Doacao();
+    DoacaoDAO Ddao = new DoacaoDAO();
+    List<Doacao> Dlista = Ddao.listar();
     
     if (request.getParameter("txtFiltro") != null) {
-        lista = dao.listar(request.getParameter("txtFiltro"));
+        Dlista = Ddao.listar(request.getParameter("txtFiltro"));
         
     } else{ 
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
-            if(obj != null){
-                Boolean funcionou = dao.excluir(obj);
+            Dobj = Ddao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            if(Dobj != null){
+                //atribuo o codigo do item que ta na doação para o obj
+                Iobj = Dobj.getCodigoItensdoacao();
+                //excluo a doação
+                Ddao.excluir(Dobj);
+                //excluo o item da doação
+                Boolean funcionou = Idao.excluir(Iobj);
             }
         }
         
-        lista = dao.listar();
+        Dlista = Ddao.listar();
     }
 %>
 
@@ -30,7 +43,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center">Gerenciar Planta</h1>
+            <h1 class="text-center">Gerenciar Doação</h1>
           </div>
         </div>
       </div>
@@ -40,40 +53,32 @@
         <div class="row">
           <div class="col-md-12">
             <div class="panel-body">
-                <a  href="addPlanta.jsp" class="btn  btn-primary btn-sm fa fa-plus-square-o" >Novo</a>
+                <a  href="addDoacao.jsp" class="btn  btn-primary btn-sm fa fa-plus-square-o" >Novo</a>
             </div>
             <table class="table">
               <thead class="thead-inverse">
                 <tr>
                   <th>Código</th>
-                  <th>Nome Popular</th>
-                  <th>Nome Científico</th>
-                  <th>Origem</th>
-                  <th>Propagação</th>
-                  <th>Época de Poda</th>
-                  <th>Quantidade</th>
-                  <th>Categoria</th>
-                  <th>Data</th>
-                  <th>Imagem</th>
+                  <th>Nome Planta</th>
+                  <th>Quantidade para doar</th>
+                  <th>Data doação</th>
+                  <th>Doação efetuada</th>
+                  <th>Descrição</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                <%for(Planta item: lista){
+                <%for(Doacao item: Dlista){
                 %>
                 <tr>
                     <td><%=item.getCodigo()%></td>
-                    <td><%=item.getNomePopular()%></td>
-                    <td><%=item.getNomeCientifico()%></td>
-                    <td><%=item.getOrigem()%></td>
-                    <td><%=item.getPropagacao()%></td>
-                    <td><%=item.getEpocaPoda()%></td>
-                    <td><%=item.getQuantidade()%></td>
-                    <td><%=item.getCodigoCategoria().getNome() %></td>
-                    <td><%=item.getDataPlanta() %></td>
-                    <td><img src="../Fotos/<%=item.getImagem() %>" width="40" height="40" /> </td>
+                    <td><%=item.getCodigoItensdoacao().getCodigoPlanta().getNomePopular() %></td>
+                    <td><%=item.getCodigoItensdoacao().getQuantidade() %></td>
+                    <td><%=item.getDataDoacao() %></td>
+                    <td><%=item.getDoada()%></td>
+                    <td><%=item.getDescricao()%></td>
                     <td><a href="updPlanta.jsp?codigo=<%=item.getCodigo()%>" class="btn btn-primary">Alterar</a>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModalPlanta" onclick="codigo=<%=item.getCodigo()%>">Excluir</button> 
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModalDoacao" onclick="codigo=<%=item.getCodigo()%>">Excluir</button> 
                     </td>
                 </tr>
                 <% } %>
@@ -84,5 +89,5 @@
       </div>
     </div>
 
-<%@include file="modalExcluirPlanta.jsp" %>
+<%@include file="modalExcluirDoacao.jsp" %>
 <%@include file="rodape.jsp"%>

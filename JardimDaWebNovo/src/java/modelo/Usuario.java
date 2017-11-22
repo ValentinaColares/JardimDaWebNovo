@@ -33,6 +33,9 @@ import javax.persistence.Table;
 })
 public class Usuario implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoUsuario")
+    private List<Doacao> doacaoList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -218,6 +221,14 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "modelo.Usuario[ codigo=" + codigo + " ]";
+    }
+
+    public List<Doacao> getDoacaoList() {
+        return doacaoList;
+    }
+
+    public void setDoacaoList(List<Doacao> doacaoList) {
+        this.doacaoList = doacaoList;
     }
     
 }

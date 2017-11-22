@@ -37,9 +37,16 @@ public class Doacao implements Serializable {
     @Basic(optional = false)
     @Column(name = "data_doacao")
     private String dataDoacao;
+    @Column(name = "doada")
+    private Boolean doada;
+    @Column(name = "descricao")
+    private String descricao;
     @JoinColumn(name = "codigo_itensdoacao", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
     private Itensdoacao codigoItensdoacao;
+    @JoinColumn(name = "codigo_usuario", referencedColumnName = "codigo")
+    @ManyToOne(optional = false)
+    private Usuario codigoUsuario;
 
     public Doacao() {
     }
@@ -69,12 +76,36 @@ public class Doacao implements Serializable {
         this.dataDoacao = dataDoacao;
     }
 
+    public Boolean getDoada() {
+        return doada;
+    }
+
+    public void setDoada(Boolean doada) {
+        this.doada = doada;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public Itensdoacao getCodigoItensdoacao() {
         return codigoItensdoacao;
     }
 
     public void setCodigoItensdoacao(Itensdoacao codigoItensdoacao) {
         this.codigoItensdoacao = codigoItensdoacao;
+    }
+
+    public Usuario getCodigoUsuario() {
+        return codigoUsuario;
+    }
+
+    public void setCodigoUsuario(Usuario codigoUsuario) {
+        this.codigoUsuario = codigoUsuario;
     }
 
     @Override
