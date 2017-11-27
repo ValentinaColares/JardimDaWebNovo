@@ -31,13 +31,11 @@
         <div class="container">
             <div class="row">
                 <div class="row text-center">
-
+                    <%
+                        for(Planta Pitem : Plista){
+                    %>
                     <div class="col-md-3 col-sm-6 hero-feature">
                         <div class="thumbnail">
-                            <%
-                                for(Planta Pitem : Plista){
-                            %>
-
                             <%if(Pitem.getImagem() == null){ %>    
                             <a href="detalhePlanta.jsp?codigo=<%=Pitem.getCodigo()%>"><img src="http://placehold.it/800x500" alt=""></a>
                             <%} else if(Pitem.getImagem() != null){ %>
@@ -48,10 +46,10 @@
                                 <h4><%=Pitem.getNomeCientifico()%></h4>
                                 <p><%=Pitem.getCodigoCategoria().getNome() %></p>
                                 <p><%=Pitem.getDescricao()%></p>
-                            <% } %>
                             </div>
                         </div>
-                    </div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>

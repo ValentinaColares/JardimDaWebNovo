@@ -59,13 +59,9 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Doações<span></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="listaDoacao.jsp">Árvores</a></li>
-                        <li><a href="listaDoacao.jsp">Temperos</a></li>
-                        <li><a href="listaDoacao.jsp">Chás</a></li>
-                        <li><a href="listaDoacao.jsp">Flores</a></li>
-                        <li><a href="listaDoacao.jsp">Verduras</a></li>
-                        <li><a href="listaDoacao.jsp">Legumes</a></li>
-                        <li><a href="listaDoacao.jsp">PANC's</a></li>
+                        <%for(Categoria Citem: Clista){ %>
+                            <li><a class="list" href="listaDoacao.jsp?categoria=<%=Citem.getCodigo()%>"><%=Citem.getNome() %></a></li>
+                        <% } %>
                         
                         <%if (session.getAttribute("usuario") != null) { %>
                         <hr size="1" width="50%" align="center">
