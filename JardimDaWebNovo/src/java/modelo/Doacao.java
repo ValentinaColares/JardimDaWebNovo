@@ -26,7 +26,8 @@ import javax.persistence.Table;
 @Table(name = "doacao")
 @NamedQueries({
     @NamedQuery(name = "Doacao.findAll", query = "SELECT d FROM Doacao d"),
-    @NamedQuery(name = "Doacao.findCodCategoria", query = "SELECT d FROM Doacao d WHERE d.codigoItensdoacao.codigoPlanta.codigoCategoria.codigo = :codigo")
+    @NamedQuery(name = "Doacao.findCodCategoria", query = "SELECT d FROM Doacao d WHERE d.codigoItensdoacao.codigoPlanta.codigoCategoria.codigo = :codigo"),
+    @NamedQuery(name = "Doacao.findFilter", query = "SELECT d FROM Doacao d WHERE d.codigoItensdoacao.codigoPlanta.nomePopular like :filtro or d.codigoItensdoacao.codigoPlanta.nomeCientifico like :filtro or d.codigoItensdoacao.codigoPlanta.codigoCategoria.nome like :filtro")
 })
 public class Doacao implements Serializable {
 

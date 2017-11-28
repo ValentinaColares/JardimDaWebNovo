@@ -1,4 +1,6 @@
 
+<%@page import="dao.DoacaoDAO"%>
+<%@page import="modelo.Doacao"%>
 <%@page import="modelo.Planta"%>
 <%@page import="dao.PlantaDAO"%>
 <%@page import="dao.CategoriaDAO"%>
@@ -26,9 +28,12 @@
     PlantaDAO Pdao = new PlantaDAO();
     List<Planta> Plista;
     
+    DoacaoDAO Ddao = new DoacaoDAO();
+    List<Doacao> Dlista;
+    
     if (request.getParameter("txtFiltro") != null) {
-        Plista = Pdao.listar(request.getParameter("txtFiltro"));
-        
+        //response.sendRedirect("listar.jsp");
+        //Plista = Pdao.listar(request.getParameter("txtFiltro"));
     }
     
 %>
@@ -100,7 +105,7 @@
 
                 <li>
                     <nav class="navbar navbar-light bg-light justify-content-between">
-                        <form class="form-inline">
+                        <form action="listar.jsp" class="form-inline">
                             <input class="form-control mr-sm-2" type="text" name="txtFiltro" placeholder="Search" aria-label="Search">
                             <button class="btn btn-primary" type="submit">Search</button>
                         </form>

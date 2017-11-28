@@ -12,7 +12,7 @@
     ItensdoacaoDAO ITdao = new ItensdoacaoDAO();
     
     Doacao Dobj = new Doacao();
-    DoacaoDAO Ddao = new DoacaoDAO();
+    Ddao = new DoacaoDAO();
     
     PlantaDAO pDAO = new PlantaDAO();
     List<Planta> plista = pDAO.listar();

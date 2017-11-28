@@ -14,8 +14,8 @@
     List<Itensdoacao> Ilista = Idao.listar();
     
     Doacao Dobj = new Doacao();
-    DoacaoDAO Ddao = new DoacaoDAO();
-    List<Doacao> Dlista = Ddao.listar();
+    Ddao = new DoacaoDAO();
+    Dlista = Ddao.listar();
     
     if (request.getParameter("txtFiltro") != null) {
         Dlista = Ddao.listar(request.getParameter("txtFiltro"));

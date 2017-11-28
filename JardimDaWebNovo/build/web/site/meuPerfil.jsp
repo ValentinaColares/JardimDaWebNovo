@@ -9,6 +9,11 @@
     UsuarioDAO dao = new UsuarioDAO();
     List<Usuario> lista = dao.listar();
     
+    Pdao = new PlantaDAO();
+    Plista = Pdao.listar();
+    
+    Ddao = new DoacaoDAO();
+    Dlista = Ddao.listar();    
     
     if (session.getAttribute("usuario") == null) {
         response.sendRedirect("login.jsp");
@@ -72,72 +77,56 @@
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-                        <h2>
-                            <b>Planta</b>
-                        </h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
+                    <!-- Aqui vai planta -->
+                    <%
+                        for(Planta Pitem : Plista){
+                    %>
+                    <div class="col-md-3 col-sm-6 hero-feature">
+                        <div class="thumbnail">
+                            <%if(Pitem.getImagem() == null){ %>    
+                            <a href="detalhePlanta.jsp?codigo=<%=Pitem.getCodigo()%>"><img src="http://placehold.it/800x500" alt=""></a>
+                            <%} else if(Pitem.getImagem() != null){ %>
+                            <a href="detalhePlanta.jsp?codigo=<%=Pitem.getCodigo()%>"><img src="../Fotos/<%=Pitem.getImagem() %>" width="800" height="500"></a>
+                            <% } %>
+                            <div class="caption">
+                                <h3><%=Pitem.getNomePopular() %></h3>
+                                <h4><%=Pitem.getNomeCientifico()%></h4>
+                                <p><%=Pitem.getCodigoCategoria().getNome() %></p>
+                                <p><%=Pitem.getDescricao()%></p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-                        <h2>A title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
-                    </div>
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive img-rounded">
-                        <h2>A title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
-                    </div>
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-                        <h2>A title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
-                    </div>
+                    <% } %>
+                    
                 </div>
             </div>
         </div>
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-                        <h2>
-                            <b>Doação</b>
-                        </h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
+                   <!-- Aqui vai a doação -->
+                   <%
+                    for(Doacao Ditem : Dlista){ 
+                %>
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <%if(Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() == null){ %>    
+                            <a href="detalheDoacao.jsp?codigo=<%=Ditem.getCodigo()%>"><img src="http://placehold.it/800x500" alt=""></a>
+                            <%} else if(Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() != null){ %>
+                            <a href="detalheDoacao.jsp?codigo=<%=Ditem.getCodigo()%>"><img src="../Fotos/<%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() %>" width="800" height="500"></a>
+                        <% } %>
+                        <div class="caption">
+                            <h2><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomePopular()%></h2>
+                            <h4><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomeCientifico()%></h4>
+                            <p><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getCodigoCategoria().getNome() %></p>
+                            <p>
+                              <strong>Planta doada? </strong><%if(Ditem.getDoada() == true){%>Sim<%}else{%>Não<%}%></p>
+                            
+                            
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-                        <h2>A title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
-                    </div>
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive img-rounded">
-                        <h2>A title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
-                    </div>
-                    <div class="col-md-3">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
-                        <h2>A title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
-                    </div>
+                </div>
+                <%} %>
                 </div>
             </div>
         </div>

@@ -5,14 +5,14 @@
     
 <%
     Doacao obj = new Doacao();
-    DoacaoDAO dao = new DoacaoDAO();
-    List<Doacao> Dlista = dao.listar();
+    Ddao = new DoacaoDAO();
+    Dlista = Ddao.listar();
    
     if(request.getParameter("categoria")!= null){
-        Dlista = dao.listarFiltro(Integer.parseInt(request.getParameter("categoria")), "C");
+        Dlista = Ddao.listarFiltro(Integer.parseInt(request.getParameter("categoria")), "C");
     }
     else{
-        Dlista = dao.listar();
+        Dlista = Ddao.listar();
     }
     
 
