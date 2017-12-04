@@ -34,26 +34,31 @@
             <div class="row text-center">
                 <%
                     for(Doacao Ditem : Dlista){ 
+                        obj = Ddao.buscarPorChavePrimaria(Ditem.getCodigo());
+                        if(obj.getDoada() == false){
                 %>
-                <div class="col-md-3 col-sm-6 hero-feature">
-                    <div class="thumbnail">
-                        <%if(Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() == null){ %>    
-                            <a href="detalheDoacao.jsp?codigo=<%=Ditem.getCodigo()%>"><img src="http://placehold.it/800x500" alt=""></a>
-                            <%} else if(Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() != null){ %>
-                            <a href="detalheDoacao.jsp?codigo=<%=Ditem.getCodigo()%>"><img src="../Fotos/<%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() %>" width="800" height="500"></a>
-                        <% } %>
-                        <div class="caption">
-                            <h2><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomePopular()%></h2>
-                            <h4><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomeCientifico()%></h4>
-                            <p><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getCodigoCategoria().getNome() %></p>
-                            <p>
-                              <strong>Doadora: </strong><%=Ditem.getCodigoUsuario().getNome() %></p>
-                            <p><%=Ditem.getCodigoUsuario().getCidade() %> - <%=Ditem.getCodigoUsuario().getEstado()%></p>
-                            
+                    <div class="col-md-3 col-sm-6 hero-feature">
+                        <div class="thumbnail">
+                            <%if(Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() == null){ %>    
+                                <a href="detalheDoacao.jsp?codigo=<%=Ditem.getCodigo()%>"><img src="http://placehold.it/800x500" alt=""></a>
+                                <%} else if(Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() != null){ %>
+                                <a href="detalheDoacao.jsp?codigo=<%=Ditem.getCodigo()%>"><img src="../Fotos/<%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() %>" width="800" height="500"></a>
+                            <% } %>
+                            <div class="caption">
+                                <h2><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomePopular()%></h2>
+                                <h4><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomeCientifico()%></h4>
+                                <p><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getCodigoCategoria().getNome() %></p>
+                                <p>
+                                  <strong>Doadora: </strong><%=Ditem.getCodigoUsuario().getNome() %></p>
+                                <p><%=Ditem.getCodigoUsuario().getCidade() %> - <%=Ditem.getCodigoUsuario().getEstado()%></p>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <%} %>
+                <%
+                    }
+                }
+                %>
             </div>
           
         </div>

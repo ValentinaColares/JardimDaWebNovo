@@ -128,7 +128,7 @@
                 </div> 
                 <div class="form-group">
                     <label>Descrição</label>
-                    <textarea class="form-control" name="txtDescricao" value="<%=Dobj.getDescricao()%>"></textarea>
+                    <textarea class="form-control" name="txtDescricao" value="<%=Dobj.getDescricao()%>"><%=Dobj.getDescricao()%></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                  

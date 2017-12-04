@@ -45,10 +45,12 @@
             obj.setCep(up.getForm().get("txtCep").toString());
             obj.setEmail(up.getForm().get("txtEmail").toString());
             
-            if(Boolean.parseBoolean(request.getParameter("checkSenha"))){
+            //if(Boolean.parseBoolean(request.getParameter("checkSenha"))){
+                //obj.setSenha(Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString()));
+            //}
+            if(obj.getSenha() != Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString())){
                 obj.setSenha(Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString()));
             }
-            
             
             if(up.getForm().get("txtDoador") != null){
                 obj.setDoador(true);
@@ -128,7 +130,7 @@
                         </div>
                         <div class="form-group">
                             <label>Senha</label>
-                            <input type="password" name="txtSenha" class="form-control" value="<%=obj.getSenha()%>"><input type="checkbox" name="checkSenha"  class="form-check-input">
+                            <input type="password" name="txtSenha" class="form-control" value="<%=obj.getSenha()%>">
                         </div> 
                         <div class="form-group">
                             <label>Imagem</label>

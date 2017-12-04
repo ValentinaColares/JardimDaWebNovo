@@ -55,18 +55,19 @@
                 obj.setPropagacao(up.getForm().get("txtPropagacao").toString());
                 obj.setEpocaPoda(up.getForm().get("txtPoda").toString());
                 obj.setQuantidade(Integer.parseInt(up.getForm().get("txtQtd").toString()));
-
+                obj.setDescricao(up.getForm().get("txtDescricao").toString());
+                                
+                //set de Categoria
                 Categoria categoria = new Categoria();    
                 categoria.setCodigo(Integer.parseInt(up.getForm().get("selCategoria").toString()));
                 obj.setCodigoCategoria(categoria);
 
-                dao.alterar(obj);
-
+                //set de Imagem
                 if(!up.getFiles().isEmpty()){
                     obj.setImagem(up.getFiles().get(0));
                 }
 
-                dao.alterar(obj);  
+                resultado = dao.alterar(obj);  
             }
             if(resultado){
                 response.sendRedirect("gerenciarPlanta.jsp");
@@ -140,20 +141,20 @@
                         </div>
                         <div class="form-group">
                             <label>Categoria</label>                            
-                            <select class="form-control form-control-lg" name="selCategoria" >
-                                <option value="<%=obj.getCodigoCategoria()%>">Selecione</option>
-                            <% 
-                                for(Categoria cat: clista) {
-                            %>
-                                <option value="<%=cat.getCodigo() %>" ><%=cat.getNome() %></option>
-                            <% 
-                                }
-                            %>   
+                            <select class="form-control form-control-lg" name="selCategoria">
+                                <option value="<%=obj.getCodigoCategoria().getCodigo() %>"><%=obj.getCodigoCategoria().getNome() %></option>
+                                <% 
+                                    for(Categoria cat: clista) {
+                                %>
+                                <option value="<%=cat.getCodigo() %>" ><%=cat.getNome()%></option>
+                                <% 
+                                    }
+                                %>   
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Descrição</label>
-                            <textarea class="form-control" value="<%=obj.getDescricao()%>" name="txtDescricao"></textarea>
+                            <textarea class="form-control" value="<%=obj.getDescricao()%>" name="txtDescricao"><%=obj.getDescricao()%></textarea>
                         </div>            
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
