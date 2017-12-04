@@ -1,8 +1,12 @@
 <%@include file="cabecalho.jsp"%>
 
+<% 
+    usuario = ((Usuario) session.getAttribute("usuario"));
+%>
+
     <div class="container">
         <div class="row">
-            <h3>Infelizmente você não é um doador. Gostaria de se tornar? <a href="updUsuario.jsp">Clique aqui</a> e altere seu perfil para o de um doador</h3>
+            <h3>Infelizmente você não é um doador. Gostaria de se tornar? <a href="updUsuario.jsp?codigo=<%=usuario.getCodigo() %>">Clique aqui</a> e altere seu perfil para o de um doador</h3>
         </div>
     </div>
 
