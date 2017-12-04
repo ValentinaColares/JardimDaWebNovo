@@ -8,6 +8,7 @@
 <link href="../addPlanta.css" rel="stylesheet" type="text/css">
 
 <% 
+    
     Itensdoacao Iobj = new Itensdoacao();
     ItensdoacaoDAO ITdao = new ItensdoacaoDAO();
     
@@ -25,33 +26,39 @@
     } else{   
         
         usuario = ((Usuario) session.getAttribute("usuario"));
-    
-        if(request.getMethod().equals("POST")){  
-            //Itens da doação
-            //set de Planta
-            Planta planta = new Planta();    
-            planta.setCodigo(Integer.parseInt(request.getParameter("selPlanta")));
-            Iobj.setCodigoPlanta(planta); 
-            //set de quantidade
-            Iobj.setQuantidade(Integer.parseInt(request.getParameter("txtQtd")));
-            ITdao.incluir(Iobj);
-            
-            //Doação
-            Dobj.setCodigoItensdoacao(Iobj);
-            //fazendo o add da Data
-            Data d = new Data();
-            Dobj.setDataDoacao(d.getData());
-            Dobj.setDescricao(request.getParameter("txtDescricao"));
-            Dobj.setDoada(false);
-            Dobj.setCodigoUsuario(usuario);
-            
-            resultado = Ddao.incluir(Dobj);
-
-        }   
         
-        if(resultado){
-            response.sendRedirect("gerenciarDoacao.jsp");
-        }      
+        //Pergunta se o usuario é doador
+        if(usuario.getDoador() == true){
+    
+            if(request.getMethod().equals("POST")){  
+                //Itens da doação
+                //set de Planta
+                Planta planta = new Planta();    
+                planta.setCodigo(Integer.parseInt(request.getParameter("selPlanta")));
+                Iobj.setCodigoPlanta(planta); 
+                //set de quantidade
+                Iobj.setQuantidade(Integer.parseInt(request.getParameter("txtQtd")));
+                ITdao.incluir(Iobj);
+
+                //Doação
+                Dobj.setCodigoItensdoacao(Iobj);
+                //fazendo o add da Data
+                Data d = new Data();
+                Dobj.setDataDoacao(d.getData());
+                Dobj.setDescricao(request.getParameter("txtDescricao"));
+                Dobj.setDoada(false);
+                Dobj.setCodigoUsuario(usuario);
+
+                resultado = Ddao.incluir(Dobj);
+
+            }   
+
+            if(resultado){
+                response.sendRedirect("gerenciarDoacao.jsp");
+            }   
+        }else{
+            response.sendRedirect("naoDoador.jsp");
+        }
     }
 %>
 

@@ -5,18 +5,24 @@
     SugestaoDAO Sugdao = new SugestaoDAO();
     Sugestao Sugobj = new Sugestao();
     
-    usuario = ((Usuario) session.getAttribute("usuario"));
-    Boolean resultado = false;
+    if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
     
-    if(request.getParameter("txtSugestao") != null && session.getAttribute("usuario") != null){
-        Sugobj.setSugestao(request.getParameter("txtSugestao"));
-        Sugobj.setCodigoUsuario(usuario);
-        
-        resultado = Sugdao.incluir(Sugobj);
-    }
+    } else{   
+    
+        usuario = ((Usuario) session.getAttribute("usuario"));
+        Boolean resultado = false;
 
-    if(resultado){
-        response.sendRedirect("gerenciarSugestao.jsp");
+        if(request.getParameter("txtSugestao") != null && session.getAttribute("usuario") != null){
+            Sugobj.setSugestao(request.getParameter("txtSugestao"));
+            Sugobj.setCodigoUsuario(usuario);
+
+            resultado = Sugdao.incluir(Sugobj);
+        }
+
+        if(resultado){
+            response.sendRedirect("gerenciarSugestao.jsp");
+        }
     }
    
 %>

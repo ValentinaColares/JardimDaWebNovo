@@ -7,27 +7,35 @@
     Categoria obj = new Categoria();
     CategoriaDAO dao = new CategoriaDAO();
     
-    if(request.getMethod().equals("POST")){
-        obj.setCodigo(Integer.parseInt(request.getParameter("txtCodigo")));
-        obj.setNome(request.getParameter("txtNome"));
-        Boolean resultado = dao.alterar(obj);
+    if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+    
+    } else{   
         
-        if(resultado){
-            response.sendRedirect("gerenciarCategoria.jsp");
-        }
-    }else{
-        //se vier por get
-        if(request.getParameter("codigo") == null){
-            response.sendRedirect("gerenciarCategoria.jsp");
-        }
-        dao = new CategoriaDAO();
-        obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
-        
-        if(obj == null){
-            response.sendRedirect("gerenciarCategoria.jsp");
-            return;
-        }
-    }  
+        usuario = ((Usuario) session.getAttribute("usuario"));
+    
+        if(request.getMethod().equals("POST")){
+            obj.setCodigo(Integer.parseInt(request.getParameter("txtCodigo")));
+            obj.setNome(request.getParameter("txtNome"));
+            Boolean resultado = dao.alterar(obj);
+
+            if(resultado){
+                response.sendRedirect("gerenciarCategoria.jsp");
+            }
+        }else{
+            //se vier por get
+            if(request.getParameter("codigo") == null){
+                response.sendRedirect("gerenciarCategoria.jsp");
+            }
+            dao = new CategoriaDAO();
+            obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+
+            if(obj == null){
+                response.sendRedirect("gerenciarCategoria.jsp");
+                return;
+            }
+        }  
+    }
 %>
     
     <div class="section">

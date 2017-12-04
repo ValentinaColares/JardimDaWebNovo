@@ -11,20 +11,28 @@
     CategoriaDAO dao = new CategoriaDAO();
     List<Categoria> lista = dao.listar();
     
-    if (request.getParameter("txtFiltro") != null) {
-        lista = dao.listar(request.getParameter("txtFiltro"));
+    if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+    
+    } else{   
         
-    } else{ 
-   
-        //verifico se é excluir
-        if(request.getParameter("codigo") != null){
-            obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
-            if(obj != null){
-                dao.excluir(obj);
+        //usuario = ((Usuario) session.getAttribute("usuario"));
+        
+        if (request.getParameter("txtFiltro") != null) {
+            lista = dao.listar(request.getParameter("txtFiltro"));
+
+        } else{ 
+
+            //verifico se é excluir
+            if(request.getParameter("codigo") != null){
+                obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+                if(obj != null){
+                    dao.excluir(obj);
+                }
             }
+
+            lista = dao.listar();
         }
-        
-        lista = dao.listar();
     }
 %>
 

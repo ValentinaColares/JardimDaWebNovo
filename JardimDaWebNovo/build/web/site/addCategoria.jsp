@@ -8,15 +8,22 @@
     Categoria obj = new Categoria();
     
    Boolean resultado = false;
+   
+    if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
     
-    if(request.getParameter("txtNome") != null){
-        obj.setNome(request.getParameter("txtNome"));
-        resultado = dao.incluir(obj);
+    } else{
+        
+        if(request.getParameter("txtNome") != null){
+            obj.setNome(request.getParameter("txtNome"));
+            resultado = dao.incluir(obj);
+        }
+
+        if(resultado){
+            response.sendRedirect("gerenciarCategoria.jsp");
+        }
     }
     
-    if(resultado){
-        response.sendRedirect("gerenciarCategoria.jsp");
-    }
     
 %>
 

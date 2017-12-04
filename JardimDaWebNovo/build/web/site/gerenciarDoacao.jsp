@@ -17,25 +17,30 @@
     Ddao = new DoacaoDAO();
     Dlista = Ddao.listar();
     
-    if (request.getParameter("txtFiltro") != null) {
-        Dlista = Ddao.listar(request.getParameter("txtFiltro"));
-        
-    } else{ 
-   
-    //verifico se é excluir
-        if(request.getParameter("codigo") != null){
-            Dobj = Ddao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
-            if(Dobj != null){
-                //atribuo o codigo do item que ta na doação para o obj
-                Iobj = Dobj.getCodigoItensdoacao();
-                //excluo a doação
-                Ddao.excluir(Dobj);
-                //excluo o item da doação
-                Boolean funcionou = Idao.excluir(Iobj);
+    if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+    
+    } else{
+        if (request.getParameter("txtFiltro") != null) {
+            Dlista = Ddao.listar(request.getParameter("txtFiltro"));
+
+        } else{ 
+
+        //verifico se é excluir
+            if(request.getParameter("codigo") != null){
+                Dobj = Ddao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+                if(Dobj != null){
+                    //atribuo o codigo do item que ta na doação para o obj
+                    Iobj = Dobj.getCodigoItensdoacao();
+                    //excluo a doação
+                    Ddao.excluir(Dobj);
+                    //excluo o item da doação
+                    Boolean funcionou = Idao.excluir(Iobj);
+                }
             }
+
+            Dlista = Ddao.listar();
         }
-        
-        Dlista = Ddao.listar();
     }
 %>
 
