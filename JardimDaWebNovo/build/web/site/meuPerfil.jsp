@@ -37,7 +37,6 @@
                 response.sendRedirect("index.jsp");
             }
         }
-        
     }
     
     
@@ -108,7 +107,7 @@
                 <%
                     
                     for(Doacao Ditem : Dlista){ 
-                        if(Ditem.getCodigoUsuario() == usuario){
+                        if(Ditem.getCodigoUsuario().getCodigo() == usuario.getCodigo()){
                 %>
                         <div class="col-md-3 col-sm-6 hero-feature">
                             <div class="thumbnail">

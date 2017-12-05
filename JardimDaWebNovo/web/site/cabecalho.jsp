@@ -20,6 +20,7 @@
 <% 
     
     Usuario usuario = new Usuario();
+    usuario = ((Usuario) session.getAttribute("usuario"));
     UsuarioDAO Usuariodao = new UsuarioDAO();
     
     CategoriaDAO Cdao = new CategoriaDAO();
@@ -51,14 +52,14 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Plantas<span></span></a>
                     <ul class="dropdown-menu">
-                        <%for(Categoria Citem: Clista){ %>
+                    <%for(Categoria Citem: Clista){ %>
                             <li><a class="list" href="listaPlanta.jsp?categoria=<%=Citem.getCodigo()%>"><%=Citem.getNome() %></a></li>
                         <% } %>                        
                         <%if (session.getAttribute("usuario") != null) { %>
                         <hr size="1" width="50%" align="center">
                             <li><a href="addPlanta.jsp">Cadastrar</a></li>
                             <li><a href="gerenciarPlanta.jsp">Gerenciar</a></li>
-                        <%} %>
+                    <%} %>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -76,7 +77,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                <%if (session.getAttribute("usuario") != null) { %>
+                <%if (session.getAttribute("usuario") != null && usuario.getCodigo() == 1) { %>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria<span></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="addCategoria.jsp">Cadastrar</a></li>
