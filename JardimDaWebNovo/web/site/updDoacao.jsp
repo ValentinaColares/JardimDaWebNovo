@@ -29,14 +29,14 @@
         usuario = ((Usuario) session.getAttribute("usuario"));
     
         if(request.getMethod().equals("POST")){ 
-            if(request.getParameter("codigo") == null){
-                response.sendRedirect("gerenciarDoacao.jsp"); //volta pra index
+            if(request.getParameter("codigoDoacao") == null){
+                response.sendRedirect("meuPerfil.jsp"); //volta pra index
                 return;
             }
             //buscar o obj a partir da chave primaria
             //exibe as informações od obj no form
 
-            Integer codigo = Integer.parseInt(request.getParameter("codigo"));
+            Integer codigo = Integer.parseInt(request.getParameter("codigoDoacao"));
             Dobj = Ddao.buscarPorChavePrimaria(codigo);
             
             //Itens da doação
@@ -67,21 +67,21 @@
 
         }else{
             //se vier por GET
-            if(request.getParameter("codigo") == null){
-                response.sendRedirect("gerenciarDoacao.jsp");
+            if(request.getParameter("codigoDoacao") == null){
+                response.sendRedirect("meuPerfil.jsp");
             }
 
             Ddao = new DoacaoDAO();
-            Dobj = Ddao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Dobj = Ddao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigoDoacao")));
 
             if(Dobj == null){
-                response.sendRedirect("gerenciarDoacao.jsp");
+                response.sendRedirect("meuPerfil.jsp");
                 return;
             }
         }   
         
         if(resultado){
-            response.sendRedirect("gerenciarDoacao.jsp");
+            response.sendRedirect("meuPerfil.jsp");
         }      
     }
 %>
@@ -105,14 +105,16 @@
                     <input type="text" name="txtCodigo" class="form-control" value="<%=Dobj.getCodigo()%>">
                 </div>
                 <div class="form-group">
-                    <label>Planta</label>
+                    <label>Planta*</label>
                     <select class="form-control form-control-lg" name="selPlanta">
                         <option value="<%=Dobj.getCodigoItensdoacao().getCodigoPlanta() %>"><%=Dobj.getCodigoItensdoacao().getCodigoPlanta().getNomePopular() %></option>
                         <% 
                             for(Planta plan: plista) {
+                                if(plan.getCodigoUsuario().getCodigo() == usuario.getCodigo()){
                         %>
-                        <option value="<%=plan.getCodigo() %>" ><%=plan.getNomePopular()%></option>
+                            <option value="<%=plan.getCodigo() %>" ><%=plan.getNomePopular()%></option>
                         <% 
+                                }
                             }
                         %>   
                     </select>
@@ -123,13 +125,14 @@
                     <input type="checkbox" name="txtDoada" class="form-control" value="<%=Dobj.getDoada() %>">
                 </div> 
                 <div class="form-group">
-                    <label>Quantidade</label>
+                    <label>Quantidade*</label>
                     <input type="number" name="txtQtd" class="form-control" value="<%=Dobj.getCodigoItensdoacao().getQuantidade() %>">
                 </div> 
                 <div class="form-group">
                     <label>Descrição</label>
                     <textarea class="form-control" name="txtDescricao" value="<%=Dobj.getDescricao()%>"><%=Dobj.getDescricao()%></textarea>
                 </div>
+                <label>* Preenchimento obrigatório</label><br><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                  
             </form>

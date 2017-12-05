@@ -48,8 +48,10 @@
                                 <h2><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomePopular()%></h2>
                                 <h4><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomeCientifico()%></h4>
                                 <p><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getCodigoCategoria().getNome() %></p>
-                                <p>
-                                  <strong>Doadora: </strong><%=Ditem.getCodigoUsuario().getNome() %></p>
+                                
+                                <p><strong>Doador(a): </strong><%=Ditem.getCodigoUsuario().getNome() %></p>
+                                <p><%=Ditem.getCodigoUsuario().getEndereco() %></p>
+                                <p><%=Ditem.getCodigoUsuario().getBairro()%> - <%=Ditem.getCodigoUsuario().getCep() %></p>
                                 <p><%=Ditem.getCodigoUsuario().getCidade() %> - <%=Ditem.getCodigoUsuario().getEstado()%></p>
 
                             </div>

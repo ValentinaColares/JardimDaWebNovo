@@ -67,6 +67,8 @@
             resultado = dao.alterar(obj);  
         }
         if(resultado){
+            //session.setAttribute("usuario", usuario);
+            usuario = ((Usuario) session.getAttribute("usuario"));
             response.sendRedirect("meuPerfil.jsp");
         }
         
@@ -102,19 +104,23 @@
                 <div class="col-md-6">
                     <form action="#" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label>Código</label>
+                            <label>Código*</label>
                             <input type="text" name="txtCodigo" value="<%=obj.getCodigo() %>" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Nome</label>
+                            <label>Nome*</label>
                             <input type="text" name="txtNome" value="<%=obj.getNome() %>" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Bairro</label>
+                            <label>Endereço*</label>
+                            <input type="text" name="txtEndereco" class="form-control" value="<%=obj.getEndereco()%>">
+                        </div>                        
+                        <div class="form-group">
+                            <label>Bairro*</label>
                             <input type="text" name="txtBairro" class="form-control" value="<%=obj.getBairro()%>">
                         </div>
                         <div class="form-group">
-                            <label>Estado</label>
+                            <label>Estado*</label>
                             <input type="text" name="txtEstado" class="form-control" value="<%=obj.getEstado()%>">
                         </div>
                         <div class="form-group">
@@ -122,19 +128,15 @@
                             <input type="text" name="txtCep" class="form-control" value="<%=obj.getCep()%>">
                         </div>
                         <div class="form-group">
-                            <label>Endereço</label>
-                            <input type="text" name="txtEndereco" class="form-control" value="<%=obj.getEndereco()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>Cidade</label>
+                            <label>Cidade*</label>
                             <input type="text" name="txtCidade" class="form-control" value="<%=obj.getCidade()%>">
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
+                            <label>Email*</label>
                             <input type="email" name="txtEmail" class="form-control" value="<%=obj.getEmail()%>">
                         </div>
                         <div class="form-group">
-                            <label>Senha</label>
+                            <label>Senha*</label>
                             <input type="password" name="txtSenha" class="form-control" value="<%=obj.getSenha()%>"><input type="checkbox" name="checkSenha"  class="form-check-input">
                         </div> 
                         <div class="form-group">
@@ -142,9 +144,10 @@
                             <input type="file" name="txtImagem" value="<%=obj.getImagem()%>">
                         </div>
                         <div class="form-group">
-                            <label>Doador</label>
+                            <label>Doador*</label>
                             <input type="checkbox" name="txtDoador" value="<%=obj.getDoador()%>" class="form-check-input">
                         </div>
+                        <label>* Preenchimento obrigatório</label><br><br>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

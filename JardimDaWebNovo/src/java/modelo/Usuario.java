@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,9 +31,6 @@ import javax.persistence.Table;
     @NamedQuery(name = "Usuario.findFilter", query = "SELECT u FROM Usuario u WHERE u.nome like :filtro")
 })
 public class Usuario implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoUsuario")
-    private List<Doacao> doacaoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -70,10 +66,12 @@ public class Usuario implements Serializable {
     private boolean doador;
     @Column(name = "imagem")
     private String imagem;
-    @ManyToMany(mappedBy = "usuarioList")
-    private List<Planta> plantaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoUsuario")
+    private List<Doacao> doacaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoUsuario")
     private List<Sugestao> sugestaoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoUsuario")
+    private List<Planta> plantaList;
 
     public Usuario() {
     }
@@ -182,12 +180,12 @@ public class Usuario implements Serializable {
         this.imagem = imagem;
     }
 
-    public List<Planta> getPlantaList() {
-        return plantaList;
+    public List<Doacao> getDoacaoList() {
+        return doacaoList;
     }
 
-    public void setPlantaList(List<Planta> plantaList) {
-        this.plantaList = plantaList;
+    public void setDoacaoList(List<Doacao> doacaoList) {
+        this.doacaoList = doacaoList;
     }
 
     public List<Sugestao> getSugestaoList() {
@@ -196,6 +194,14 @@ public class Usuario implements Serializable {
 
     public void setSugestaoList(List<Sugestao> sugestaoList) {
         this.sugestaoList = sugestaoList;
+    }
+
+    public List<Planta> getPlantaList() {
+        return plantaList;
+    }
+
+    public void setPlantaList(List<Planta> plantaList) {
+        this.plantaList = plantaList;
     }
 
     @Override
@@ -221,14 +227,6 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "modelo.Usuario[ codigo=" + codigo + " ]";
-    }
-
-    public List<Doacao> getDoacaoList() {
-        return doacaoList;
-    }
-
-    public void setDoacaoList(List<Doacao> doacaoList) {
-        this.doacaoList = doacaoList;
     }
     
 }

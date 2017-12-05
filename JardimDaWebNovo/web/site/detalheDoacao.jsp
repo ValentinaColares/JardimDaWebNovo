@@ -1,6 +1,14 @@
 <%@include file="cabecalho.jsp"%>
 <link href="../detalheDoacao.css" rel="stylesheet" type="text/css">
 
+<% 
+    Doacao obj = new Doacao();
+    DoacaoDAO dao = new DoacaoDAO();
+    obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+    
+    
+%>
+
     <div class="section">
       <div class="container">
         <div class="row">
@@ -14,34 +22,39 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
+            <%if(obj.getCodigoItensdoacao().getCodigoPlanta().getImagem() == null){ %>
+                <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
+            <%} else if(obj.getCodigoItensdoacao().getCodigoPlanta().getImagem() != null){ %>
+                <img src="../Fotos/<%=obj.getCodigoItensdoacao().getCodigoPlanta().getImagem() %>" width="460" height="380">
+            <%}%>
           </div>
           <div class="col-md-6">
-            <strong><h1>Rosa</h1></strong>
-            <h3>Rosa Galica</h3>
+            <strong><h1><%=obj.getCodigoItensdoacao().getCodigoPlanta().getNomePopular() %></h1></strong>
+            <h3><%=obj.getCodigoItensdoacao().getCodigoPlanta().getNomeCientifico()%></h3>
             <ul>
               <li>
-                <strong>Categoria</strong>: Flor</li>
+                <strong>Categoria</strong>: <%=obj.getCodigoItensdoacao().getCodigoPlanta().getCodigoCategoria().getNome() %></li>
               <li>
-                <strong>Origem</strong>: Asiática</li>
+                <strong>Origem</strong>: <%=obj.getCodigoItensdoacao().getCodigoPlanta().getOrigem()%></li>
               <li>
-                <strong>Propagação</strong>: Enraizamento por estaquia</li>
+                <strong>Propagação</strong>: <%=obj.getCodigoItensdoacao().getCodigoPlanta().getPropagacao()%></li>
               <li>
-                <strong>Época de poca</strong>:Não há uma época especial para fazer essa poda,
-                mas evite o alto inverno para que os futuros brotos não queimem com a geada.</li>
+                <strong>Época de poca</strong>: <%=obj.getCodigoItensdoacao().getCodigoPlanta().getEpocaPoda()%></li>
               <li>
-                <strong>Descrição</strong>: As pétalas da rosa são ricas em vitamina C, por essa
-                razão ajudam a tonificar o sistema imunológico do organismo. A bebida,
-                também possui poucas calorias não interferindo na alimentação ou dietas
-                de seus consumidores.</li>
+                <strong>Quantidade</strong>: <%=obj.getCodigoItensdoacao().getCodigoPlanta().getQuantidade()%></li>
+              <li>
+                <strong>Data da Planta</strong>: <%=obj.getCodigoItensdoacao().getCodigoPlanta().getDataPlanta()%></li>
+              <li>
+              <li>
+                <strong>Descrição</strong>: <%=obj.getCodigoItensdoacao().getCodigoPlanta().getDescricao()%></li>
             </ul>
             <br>
-            <h1><strong>Doadora</strong>: Ursinha</h1>
+            <h1><strong>Doador(a)</strong>: <%=obj.getCodigoUsuario().getNome() %></h1>
             <ul>
-              <li>Rua 14 número 1014</li>
-              <li>Vila Operária</li>                                                    
-              <li>96495-000</li>
-              <li>Candiota/RS</li>
+              <li><%=obj.getCodigoUsuario().getEndereco()%></li>
+              <li><%=obj.getCodigoUsuario().getBairro()%></li>                                                    
+              <li><%=obj.getCodigoUsuario().getCep()%></li>
+              <li><%=obj.getCodigoUsuario().getCidade()%>/<%=obj.getCodigoUsuario().getEstado()%></li>
             </ul><br>
           </div>
         </div>

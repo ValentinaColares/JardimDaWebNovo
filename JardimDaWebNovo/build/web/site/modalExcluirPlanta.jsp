@@ -22,9 +22,9 @@
 <!-- /.modal -->
 
 <script>
-    var codigo;
+    var codigoPlanta;
     function excluir(){
-        document.location.href = "gerenciarPlanta.jsp?codigo="+codigo;
+        document.location.href = "meuPerfil.jsp?codigoPlanta="+codigoPlanta;
     }
 </script>
 

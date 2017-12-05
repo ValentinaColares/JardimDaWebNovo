@@ -24,26 +24,26 @@
             Upload up = new Upload();
             up.setFolderUpload("Fotos");
 
-            if(request.getParameter("codigo") == null){
-                response.sendRedirect("gerenciarPlanta.jsp"); //volta pra index
+            if(request.getParameter("codigoPlanta") == null){
+                response.sendRedirect("meuPerfil.jsp"); //volta pra index
                 return;
             }
             //buscar o obj a partir da chave primaria
             //exibe as informações od obj no form
 
-            Integer codigo = Integer.parseInt(request.getParameter("codigo"));
+            Integer codigo = Integer.parseInt(request.getParameter("codigoPlanta"));
             obj = dao.buscarPorChavePrimaria(codigo);
 
             if(up.formProcess(getServletContext(), request)){
                 if(up.getForm().get("txtNome") == null){
                     //volta pra tela da listagem
-                    response.sendRedirect("gerenciarPlanta.jsp");
+                    response.sendRedirect("meuPerfil.jsp");
                     return;
                 }
                 //verifica se o campo esta vazio
                 if(up.getForm().get("txtCodigo").toString().isEmpty()){
                     //volta pra tela da listagem
-                    response.sendRedirect("gerenciarPlanta.jsp");
+                    response.sendRedirect("meuPerfil.jsp");
                     return;
                 }
 
@@ -70,20 +70,20 @@
                 resultado = dao.alterar(obj);  
             }
             if(resultado){
-                response.sendRedirect("gerenciarPlanta.jsp");
+                response.sendRedirect("meuPerfil.jsp");
             }
 
         }else{
             //se vier por GET
-            if(request.getParameter("codigo") == null){
-                response.sendRedirect("gerenciarPlanta.jsp");
+            if(request.getParameter("codigoPlanta") == null){
+                response.sendRedirect("meuPerfil.jsp");
             }
 
             dao = new PlantaDAO();
-            obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigoPlanta")));
 
             if(obj == null){
-                response.sendRedirect("gerenciarPlanta.jsp");
+                response.sendRedirect("meuPerfil.jsp");
                 return;
             }
         }
@@ -107,11 +107,11 @@
                 <div class="col-md-6">
                     <form action="#" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label>Código</label>
+                            <label>Código*</label>
                             <input type="text" name ="txtCodigo" value="<%=obj.getCodigo() %>" placeholder="Código da Planta" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Nome</label>
+                            <label>Nome*</label>
                             <input type="text" name ="txtNome" value="<%=obj.getNomePopular()%>" placeholder="Nome da Planta" class="form-control">
                         </div>
                         <div class="form-group">
@@ -131,7 +131,7 @@
                             <input type="text" name="txtPropagacao" value="<%=obj.getPropagacao()%>" class="form-control" placeholder="Como acontece a propagação da planta">
                         </div>
                         <div class="form-group">
-                            <label>Quantidade</label>
+                            <label>Quantidade*</label>
                             <input type="number" name="txtQtd" value="<%=obj.getQuantidade()%>" class="form-control" placeholder="Quantidade de plantas">
                         </div>
 
@@ -140,7 +140,7 @@
                             <input type="file" name="txtImagem">
                         </div>
                         <div class="form-group">
-                            <label>Categoria</label>                            
+                            <label>Categoria*</label>                            
                             <select class="form-control form-control-lg" name="selCategoria">
                                 <option value="<%=obj.getCodigoCategoria().getCodigo() %>"><%=obj.getCodigoCategoria().getNome() %></option>
                                 <% 
@@ -155,7 +155,8 @@
                         <div class="form-group">
                             <label>Descrição</label>
                             <textarea class="form-control" value="<%=obj.getDescricao()%>" name="txtDescricao"><%=obj.getDescricao()%></textarea>
-                        </div>            
+                        </div> 
+                        <label>* Preenchimento obrigatório</label><br><br>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

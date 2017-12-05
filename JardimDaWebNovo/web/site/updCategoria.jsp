@@ -53,14 +53,15 @@
           <div class="col-md-6">
             <form method="post" action="#">
                 <div class="form-group">
-                    <label>Código</label>
+                    <label>Código*</label>
                     <input type="text" name="txtCodigo" value="<%=obj.getCodigo() %>" class="form-control">
                 </div>
                 
              	<div class="form-group">
-                    <label>Nome</label>
+                    <label>Nome*</label>
                     <input type="text" name="txtNome" value="<%=obj.getNome() %>" class="form-control" >
               </div>
+              <label>* Preenchimento obrigatório</label><br><br>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>

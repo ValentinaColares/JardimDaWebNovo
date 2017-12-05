@@ -58,8 +58,7 @@
                         <%if (session.getAttribute("usuario") != null) { %>
                         <hr size="1" width="50%" align="center">
                             <li><a href="addPlanta.jsp">Cadastrar</a></li>
-                            <li><a href="gerenciarPlanta.jsp">Gerenciar</a></li>
-                    <%} %>
+                        <%} %>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -72,7 +71,6 @@
                         <%if (session.getAttribute("usuario") != null) { %>
                         <hr size="1" width="50%" align="center">
                             <li><a href="addDoacao.jsp">Cadastrar</a></li>
-                            <li><a href="gerenciarDoacao.jsp">Gerenciar</a></li>
                         <%} %>
                     </ul>
                 </li>
@@ -99,6 +97,7 @@
                     <%if (session.getAttribute("usuario") != null) { %>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="css/ic_con.png"><span></span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="updUsuario.jsp?codigo=<%=usuario.getCodigo() %>">Alterar conta</a></li>
                             <li><a href="sair.jsp">Sair</a></li>
                         </ul>
                     <%} %>

@@ -22,9 +22,9 @@
 <!-- /.modal -->
 
 <script>
-    var codigo;
+    var codigoDoacao;
     function excluir(){
-        document.location.href = "gerenciarDoacao.jsp?codigo="+codigo;
+        document.location.href = "meuPerfil.jsp?codigoDoacao="+codigoDoacao;
     }
 </script>
 

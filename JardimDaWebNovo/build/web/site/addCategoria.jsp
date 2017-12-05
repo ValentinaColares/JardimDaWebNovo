@@ -42,8 +42,10 @@
           <div class="col-md-12">
             <form method="post" action="#">
               <div align="center" class="form-group">
-                <label>Nome</label>
+                <label>Nome*</label>
                 <input type="text" name="txtNome" placeholder="Digite o nome da categoria..." class="form-control">
+                
+                <label>* Preenchimento obrigatório</label><br>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>

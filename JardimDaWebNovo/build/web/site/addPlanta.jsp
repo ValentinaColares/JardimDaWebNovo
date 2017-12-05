@@ -31,13 +31,13 @@
                 //verifico se foi enviado o campo txtNome
                  if(up.getForm().get("txtNome") == null){
                     //volta pra tela da listagem
-                    response.sendRedirect("gerenciarPlanta.jsp");
+                    response.sendRedirect("meuPerfil.jsp");
                     return;
                 }
                 //verifica se o campo esta vazio
                 if(up.getForm().get("txtNome").toString().isEmpty()){
                     //volta pra tela da listagem
-                    response.sendRedirect("gerenciarPlanta.jsp");
+                    response.sendRedirect("meuPerfil.jsp");
                     return;  
                 } 
                 //Gravar planta no banco
@@ -51,6 +51,7 @@
                 obj.setEpocaPoda(up.getForm().get("txtPoda").toString());
                 obj.setQuantidade(Integer.parseInt(up.getForm().get("txtQtd").toString()));
                 obj.setDescricao(up.getForm().get("txtDescricao").toString());
+                obj.setCodigoUsuario(usuario);
                 //fazendo o add da Data
                 Data d = new Data();
                 obj.setDataPlanta(d.getData());
@@ -70,7 +71,7 @@
             }   
 
             if(resultado){
-                response.sendRedirect("gerenciarPlanta.jsp");
+                response.sendRedirect("meuPerfil.jsp");
             }
 
 
@@ -94,7 +95,7 @@
           <div class="col-md-6">
             <form action="#" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label>Nome</label>
+                    <label>Nome*</label>
                     <input type="text" name ="txtNome" placeholder="Nome da Planta" class="form-control">
                 </div>
                 <div class="form-group">
@@ -114,7 +115,7 @@
                     <input type="text" name="txtPropagacao" class="form-control" placeholder="Como acontece a propagação da planta">
                 </div>
                 <div class="form-group">
-                    <label>Quantidade</label>
+                    <label>Quantidade*</label>
                     <input type="number" name="txtQtd" class="form-control" placeholder="Quantidade de plantas">
                 </div>
                 
@@ -123,7 +124,7 @@
                     <input type="file" name="txtImagem">
                 </div>
                 <div class="form-group">
-                    <label>Categoria</label>
+                    <label>Categoria*</label>
                     <select class="form-control form-control-lg" name="selCategoria">
                         <option value="">Selecione</option>
                         <% 
@@ -139,7 +140,8 @@
                 <div class="form-group">
                     <label>Descrição</label>
                     <textarea class="form-control" name="txtDescricao" placeholder="Descrição da planta"></textarea>
-                </div>            
+                </div>
+                <label>* Preenchimento obrigatório</label><br><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                  
             </form>

@@ -15,8 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -62,14 +60,12 @@ public class Planta implements Serializable {
     private int quantidade;
     @Column(name = "imagem")
     private String imagem;
-    @JoinTable(name = "inventario", joinColumns = {
-        @JoinColumn(name = "codigo_planta", referencedColumnName = "codigo")}, inverseJoinColumns = {
-        @JoinColumn(name = "codigo_usuario", referencedColumnName = "codigo")})
-    @ManyToMany
-    private List<Usuario> usuarioList;
     @JoinColumn(name = "codigo_categoria", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
     private Categoria codigoCategoria;
+    @JoinColumn(name = "codigo_usuario", referencedColumnName = "codigo")
+    @ManyToOne(optional = false)
+    private Usuario codigoUsuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPlanta")
     private List<Itensdoacao> itensdoacaoList;
 
@@ -166,20 +162,20 @@ public class Planta implements Serializable {
         this.imagem = imagem;
     }
 
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
-    }
-
     public Categoria getCodigoCategoria() {
         return codigoCategoria;
     }
 
     public void setCodigoCategoria(Categoria codigoCategoria) {
         this.codigoCategoria = codigoCategoria;
+    }
+
+    public Usuario getCodigoUsuario() {
+        return codigoUsuario;
+    }
+
+    public void setCodigoUsuario(Usuario codigoUsuario) {
+        this.codigoUsuario = codigoUsuario;
     }
 
     public List<Itensdoacao> getItensdoacaoList() {

@@ -54,7 +54,7 @@
             }   
 
             if(resultado){
-                response.sendRedirect("gerenciarDoacao.jsp");
+                response.sendRedirect("meuPerfil.jsp");
             }   
         }else{
             response.sendRedirect("naoDoador.jsp");
@@ -77,27 +77,30 @@
           <div class="col-md-6">
             <form action="#" method="post">
                 <div class="form-group">
-                    <label>Planta</label>
+                    <label>Planta*</label>
                     <select class="form-control form-control-lg" name="selPlanta">
                         <option value="">Selecione</option>
                         <% 
                             for(Planta plan: plista) {
+                                if(plan.getCodigoUsuario().getCodigo() == usuario.getCodigo()){
                         %>
-                        <option value="<%=plan.getCodigo() %>" ><%=plan.getNomePopular()%></option>
+                            <option value="<%=plan.getCodigo() %>" ><%=plan.getNomePopular()%></option>
                         <% 
+                                }
                             }
                         %>   
                     </select>
                
                 </div>
                 <div class="form-group">
-                    <label>Quantidade</label>
+                    <label>Quantidade*</label>
                     <input type="number" name="txtQtd" class="form-control" placeholder="Quantidade de plantas para doar">
                 </div> 
                 <div class="form-group">
                     <label>Descrição</label>
                     <textarea class="form-control" name="txtDescricao" placeholder="Descrição da doação"></textarea>
                 </div>
+                <label>* Preenchimento obrigatório</label><br><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                  
             </form>

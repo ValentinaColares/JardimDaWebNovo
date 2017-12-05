@@ -77,15 +77,15 @@
               <div class="col-md-6">
                 <form action="#" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label>Nome</label>
+                        <label>Nome*</label>
                         <input type="text" name="txtNome" placeholder="Digite seu nome..." class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Bairro</label>
+                        <label>Bairro*</label>
                         <input type="text" name="txtBairro" class="form-control" placeholder="Digite seu bairro...">
                     </div>
                     <div class="form-group">
-                        <label>Estado</label>
+                        <label>Estado*</label>
                         <input type="text" name="txtEstado" class="form-control" placeholder="Digite seu estado....">
                     </div>
                     <div class="form-group">
@@ -93,19 +93,19 @@
                         <input type="text" name="txtCep" class="form-control" placeholder="Digite seu CEP...">
                     </div>
                     <div class="form-group">
-                        <label>Endereço</label>
+                        <label>Endereço*</label>
                         <input type="text" name="txtEndereco" class="form-control" placeholder="Digite seu endereço...">
                     </div>
                     <div class="form-group">
-                        <label>Cidade</label>
+                        <label>Cidade*</label>
                         <input type="text" name="txtCidade" class="form-control" placeholder="Digite sua cidade...">
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
+                        <label>Email*</label>
                         <input type="email" name="txtEmail" class="form-control" placeholder="Digite seu email...">
                     </div>
                    <div class="form-group">
-                        <label>Senha</label>
+                        <label>Senha*</label>
                         <input type="password" name="txtSenha" class="form-control" placeholder="Digite sua senha...">
                     </div> 
                     <div class="form-group">
@@ -113,9 +113,10 @@
                         <input type="file" name="txtImagem">
                     </div>
                     <div class="form-group">
-                        <label>Doador</label>
+                        <label>Doador*</label>
                         <input type="checkbox" name="txtDoador" class="form-check-input">
                     </div>
+                    <label>* Preenchimento obrigatório</label><br><br>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
                   

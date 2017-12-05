@@ -26,7 +26,7 @@
             <%if(obj.getImagem() == null){ %>
                 <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
             <%} else if(obj.getImagem() != null){ %>
-                <img src="../Fotos/<%=obj.getImagem() %>" width="360" height="280">
+                <img src="../Fotos/<%=obj.getImagem() %>" width="460" height="380">
             <%}%>
           </div>
           <div class="col-md-4 single-grid simpleCart_shelfItem">
