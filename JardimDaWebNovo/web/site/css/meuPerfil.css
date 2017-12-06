@@ -5739,7 +5739,7 @@ button.close {
 }
 .modal-content {
   position: relative;
-  background-color: #ffffff;
+  background-color: #85144b;
   border: 1px solid #999999;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 7.5px;
@@ -6776,3 +6776,18 @@ body {
   background-attachment: fixed;
 }
 /* PINGENDO COMMENT DO NOT REMOVE */
+
+.imagem-planta-container {
+    display: block;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.cada-planta {
+    min-height: 200px;
+}
+
+.borda-botao{
+    margin-bottom: 10px;
+}

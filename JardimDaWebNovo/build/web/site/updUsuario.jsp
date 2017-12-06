@@ -9,81 +9,91 @@
     UsuarioDAO dao = new UsuarioDAO();
     Boolean resultado = false;
     
-    if(request.getMethod().equals("POST")){
-
-        Upload up = new Upload();
-        up.setFolderUpload("Fotos");
-
-        if(request.getParameter("codigo") == null){
-            response.sendRedirect("meuPerfil.jsp"); //volta pra index
-            return;
-        }
-        //buscar o obj a partir da chave primaria
-        //exibe as informações od obj no form
+    if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("erro.jsp");
+    
+    } else{   
         
-        Integer codigo = Integer.parseInt(request.getParameter("codigo"));
-        obj = dao.buscarPorChavePrimaria(codigo);
+        usuario = ((Usuario) session.getAttribute("usuario"));
+        
+    
+        if(request.getMethod().equals("POST")){
 
-        if(up.formProcess(getServletContext(), request)){
-            if(up.getForm().get("txtNome") == null){
-                //volta pra tela da listagem
+            Upload up = new Upload();
+            up.setFolderUpload("Fotos");
+
+            if(request.getParameter("codigo") == null){
+                response.sendRedirect("meuPerfil.jsp"); //volta pra index
+                return;
+            }
+            //buscar o obj a partir da chave primaria
+            //exibe as informações od obj no form
+
+            Integer codigo = Integer.parseInt(request.getParameter("codigo"));
+            obj = dao.buscarPorChavePrimaria(codigo);
+
+            if(up.formProcess(getServletContext(), request)){
+                if(up.getForm().get("txtNome") == null){
+                    //volta pra tela da listagem
+                    response.sendRedirect("meuPerfil.jsp");
+                    return;
+                }
+                //verifica se o campo esta vazio
+                if(up.getForm().get("txtCodigo").toString().isEmpty()){
+                    //volta pra tela da listagem
+                    response.sendRedirect("meuPerfil.jsp");
+                    return;
+                }
+
+
+                obj.setNome(up.getForm().get("txtNome").toString());
+                obj.setEstado(up.getForm().get("txtEstado").toString());
+                obj.setCidade(up.getForm().get("txtCidade").toString());
+                obj.setBairro(up.getForm().get("txtBairro").toString());
+                obj.setEndereco(up.getForm().get("txtEndereco").toString());
+                obj.setCep(up.getForm().get("txtCep").toString());
+                obj.setEmail(up.getForm().get("txtEmail").toString());
+
+                if(Boolean.parseBoolean(request.getParameter("checkSenha"))){
+                    obj.setSenha(Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString()));
+                }
+
+                /*if(obj.getSenha() != Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString())){
+                    obj.setSenha(Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString()));
+                }*/
+
+                if(up.getForm().get("txtDoador") != null){
+                    obj.setDoador(true);
+                }else{
+                    obj.setDoador(false);
+                }
+
+                if(!up.getFiles().isEmpty()){
+                    obj.setImagem(up.getFiles().get(0));
+                }
+
+                resultado = dao.alterar(obj);  
+
+            }
+            if(resultado){
+                session.setAttribute("usuario", obj);
+                //usuario = ((Usuario) session.getAttribute("usuario"));
+                response.sendRedirect("meuPerfil.jsp");
+            }
+
+        }else{
+            //se vier por GET
+            if(request.getParameter("codigo") == null){
+                response.sendRedirect("meuPerfil.jsp");
+            }
+
+            dao = new UsuarioDAO();
+            obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+
+            if(obj == null){
                 response.sendRedirect("meuPerfil.jsp");
                 return;
             }
-            //verifica se o campo esta vazio
-            if(up.getForm().get("txtCodigo").toString().isEmpty()){
-                //volta pra tela da listagem
-                response.sendRedirect("meuPerfil.jsp");
-                return;
-            }
-
-
-            obj.setNome(up.getForm().get("txtNome").toString());
-            obj.setEstado(up.getForm().get("txtEstado").toString());
-            obj.setCidade(up.getForm().get("txtCidade").toString());
-            obj.setBairro(up.getForm().get("txtBairro").toString());
-            obj.setEndereco(up.getForm().get("txtEndereco").toString());
-            obj.setCep(up.getForm().get("txtCep").toString());
-            obj.setEmail(up.getForm().get("txtEmail").toString());
-            
-            if(Boolean.parseBoolean(request.getParameter("checkSenha"))){
-                obj.setSenha(Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString()));
-            }
-            
-            /*if(obj.getSenha() != Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString())){
-                obj.setSenha(Criptografia.convertPasswordToMD5(up.getForm().get("txtSenha").toString()));
-            }*/
-            
-            if(up.getForm().get("txtDoador") != null){
-                obj.setDoador(true);
-            }else{
-                obj.setDoador(false);
-            }
-            
-            if(!up.getFiles().isEmpty()){
-                obj.setImagem(up.getFiles().get(0));
-            }
-
-            resultado = dao.alterar(obj);  
-        }
-        if(resultado){
-            //session.setAttribute("usuario", usuario);
-            usuario = ((Usuario) session.getAttribute("usuario"));
-            response.sendRedirect("meuPerfil.jsp");
-        }
-        
-    }else{
-        //se vier por GET
-        if(request.getParameter("codigo") == null){
-            response.sendRedirect("meuPerfil.jsp");
-        }
-        
-        dao = new UsuarioDAO();
-        obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
-        
-        if(obj == null){
-            response.sendRedirect("meuPerfil.jsp");
-            return;
         }
     }
     

@@ -1,7 +1,7 @@
 <%@page import="dao.SugestaoDAO"%>
 <%@page import="modelo.Sugestao"%>
 <%@include file="cabecalho.jsp"%>
-<link href="../gerenciarCategoria.css" rel="stylesheet" type="text/css">
+<link href="css/gerenciarCategoria.css" rel="stylesheet" type="text/css">
     
     <%
     Sugestao obj = new Sugestao();
@@ -9,7 +9,7 @@
     List<Sugestao> lista = dao.listar();
     
     if (session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("erro.jsp");
     
     } else{   
         
@@ -59,13 +59,18 @@
               </thead>
               <tbody>
                 <%for(Sugestao item: lista){
+                    if(item.getCodigoUsuario().getCodigo() == usuario.getCodigo()){
                 %>
-                <tr>
-                  <td><%=item.getCodigo() %></td>
-                  <td><%=item.getSugestao()%></td>
-                  <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModalSugestao" onclick="codigo=<%=item.getCodigo()%>">Excluir</button></td>
-                </tr>
-                <%}%>
+                    <tr>
+                      <td><%=item.getCodigo() %></td>
+                      <td><%=item.getSugestao()%></td>
+                      <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModalSugestao" onclick="codigo=<%=item.getCodigo()%>">Excluir</button></td>
+                    </tr>
+                <%
+                    }
+                }
+                
+                %>
               </tbody>
             </table>
           </div>

@@ -13,7 +13,7 @@
     Boolean resultado = false;
     
     if (session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("erro.jsp");
     
     } else{   
         

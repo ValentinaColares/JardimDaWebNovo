@@ -10,7 +10,7 @@
    Boolean resultado = false;
    
     if (session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("erro.jsp");
     
     } else{
         
@@ -45,6 +45,7 @@
                 <label>Nome*</label>
                 <input type="text" name="txtNome" placeholder="Digite o nome da categoria..." class="form-control">
                 
+                <br>
                 <label>* Preenchimento obrigatório</label><br>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>

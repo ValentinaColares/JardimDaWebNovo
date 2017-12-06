@@ -10,7 +10,7 @@
                     <div class="form-group">
                       <textarea class="form-control" placeholder="Você pode enviar sugestões por aqui..." name="txtSugestao"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-default">Submit</button>
                   </form>
                 </div>
               </div>

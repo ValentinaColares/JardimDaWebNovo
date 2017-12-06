@@ -4,7 +4,7 @@
 <%@page import="dao.UsuarioDAO"%>
 <%@page import="modelo.Usuario"%>
 <%@include file="cabecalho.jsp"%>
-<link href="../meuPerfil.css" rel="stylesheet" type="text/css">
+<link href="css/meuPerfil.css" rel="stylesheet" type="text/css">
 
 <% 
     Usuario obj = new Usuario();
@@ -26,7 +26,7 @@
     
     
     if (session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("erro.jsp");
     
     } else{   
         
@@ -64,10 +64,11 @@
                 if(Dobj != null){
                     //atribuo o codigo do item que ta na doação para o obj
                     Iobj = Dobj.getCodigoItensdoacao();
+                    Idao.excluir(Iobj);
                     //excluo a doação
                     Ddao.excluir(Dobj);
                     //excluo o item da doação
-                    Idao.excluir(Iobj);
+                    
                 }
             }
 
@@ -123,16 +124,21 @@
                                     <%if(Pitem.getImagem() == null){ %>    
                                     <a href="detalhePlanta.jsp?codigo=<%=Pitem.getCodigo()%>"><img src="http://placehold.it/800x500" alt=""></a>
                                     <%} else if(Pitem.getImagem() != null){ %>
-                                    <a href="detalhePlanta.jsp?codigo=<%=Pitem.getCodigo()%>"><img src="../Fotos/<%=Pitem.getImagem() %>" width="800" height="500"></a>
+                                    <a href="detalhePlanta.jsp?codigo=<%=Pitem.getCodigo()%>" class="imagem-planta-container">
+                                        <img src="../Fotos/<%=Pitem.getImagem() %>" width="800" height="500">
+                                    </a>
                                     <% } %>
-                                    <div class="caption">
+                                    <div class="caption cada-planta">
                                         <h3><%=Pitem.getNomePopular() %></h3>
                                         <h4><%=Pitem.getNomeCientifico()%></h4>
                                         <p><%=Pitem.getCodigoCategoria().getNome() %></p>
                                         <p><%=Pitem.getDescricao()%></p>
                                     </div>
-                                    <a href="updPlanta.jsp?codigoPlanta=<%=Pitem.getCodigo()%>" class="btn btn-primary">Alterar</a>
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModalPlanta" onclick="codigoPlanta=<%=Pitem.getCodigo()%>">Excluir</button> 
+                                    
+                                    <div class="text-center borda-botao">
+                                        <a href="updPlanta.jsp?codigoPlanta=<%=Pitem.getCodigo()%>" class="btn btn-primary">Alterar</a>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModalPlanta" onclick="codigoPlanta=<%=Pitem.getCodigo()%>">Excluir</button> 
+                                    </div>
                                 </div>
                             </div>
                                     
@@ -159,17 +165,21 @@
                                 <%if(Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() == null){ %>    
                                     <a href="detalheDoacao.jsp?codigo=<%=Ditem.getCodigo()%>"><img src="http://placehold.it/800x500" alt=""></a>
                                     <%} else if(Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() != null){ %>
-                                    <a href="detalheDoacao.jsp?codigo=<%=Ditem.getCodigo()%>"><img src="../Fotos/<%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() %>" width="800" height="500"></a>
+                                    <a href="detalheDoacao.jsp?codigo=<%=Ditem.getCodigo()%>" class="imagem-planta-container">
+                                        <img src="../Fotos/<%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getImagem() %>" width="800" height="500">
+                                    </a>
                                 <% } %>
-                                <div class="caption">
+                                <div class="caption" cada-planta>
                                     <h2><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomePopular()%></h2>
                                     <h4><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getNomeCientifico()%></h4>
                                     <p><%=Ditem.getCodigoItensdoacao().getCodigoPlanta().getCodigoCategoria().getNome() %></p>
                                     <p>
                                       <strong>Planta doada? </strong><%if(Ditem.getDoada() == true){%>Sim<%}else{%>Não<%}%></p>
 
-                                    <a href="updDoacao.jsp?codigoDoacao=<%=Ditem.getCodigo()%>" class="btn btn-primary">Alterar</a>
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModalDoacao" onclick="codigoDoacao=<%=Ditem.getCodigo()%>">Excluir</button> 
+                                    <div class="text-center">
+                                        <a href="updDoacao.jsp?codigoDoacao=<%=Ditem.getCodigo()%>" class="btn btn-primary">Alterar</a>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModalDoacao" onclick="codigoDoacao=<%=Ditem.getCodigo()%>">Excluir</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -3,7 +3,7 @@
 <%@page import="dao.CategoriaDAO"%>
 <%@page import="modelo.Categoria"%>
 <%@include file="cabecalho.jsp"%>
-<link href="../gerenciarCategoria.css" rel="stylesheet" type="text/css">
+<link href="css/gerenciarCategoria.css" rel="stylesheet" type="text/css">
     
     <%
     //btn  btn-primary btn-sm
@@ -12,7 +12,7 @@
     List<Categoria> lista = dao.listar();
     
     if (session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("erro.jsp");
     
     } else{   
         

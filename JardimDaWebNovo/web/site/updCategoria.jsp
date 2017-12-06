@@ -8,7 +8,7 @@
     CategoriaDAO dao = new CategoriaDAO();
     
     if (session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("erro.jsp");
     
     } else{   
         

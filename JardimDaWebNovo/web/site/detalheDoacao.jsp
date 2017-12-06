@@ -25,7 +25,7 @@
             <%if(obj.getCodigoItensdoacao().getCodigoPlanta().getImagem() == null){ %>
                 <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive">
             <%} else if(obj.getCodigoItensdoacao().getCodigoPlanta().getImagem() != null){ %>
-                <img src="../Fotos/<%=obj.getCodigoItensdoacao().getCodigoPlanta().getImagem() %>" width="460" height="380">
+                <img src="../Fotos/<%=obj.getCodigoItensdoacao().getCodigoPlanta().getImagem() %>" class="img-responsive">
             <%}%>
           </div>
           <div class="col-md-6">

@@ -11,8 +11,8 @@
                 Tem certeza que deseja excluir?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="excluir()">Confirmar Exclusão</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="excluirPlanta()">Confirmar Exclusão</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -23,7 +23,7 @@
 
 <script>
     var codigoPlanta;
-    function excluir(){
+    function excluirPlanta(){
         document.location.href = "meuPerfil.jsp?codigoPlanta="+codigoPlanta;
     }
 </script>
